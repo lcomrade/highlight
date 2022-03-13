@@ -65,14 +65,14 @@ func RobotsTxt(code string) string {
 		}
 
 		// Standard
-		line = strings.Replace(line, "User-agent:", "<span class='"+StyleKeyword+"'>User-agent:</span>", 1)
-		line = strings.Replace(line, "Disallow:", "<span class='"+StyleKeyword+"'>Disallow:</span>", 1)
+		line = replacePrefix(line, "User-agent:", "<span class='"+StyleKeyword+"'>User-agent:</span>")
+		line = replacePrefix(line, "Disallow:", "<span class='"+StyleKeyword+"'>Disallow:</span>")
 
 		// Nonstandard extensions
-		line = strings.Replace(line, "Allow:", "<span class='"+StyleKeyword+"'>Allow:</span>", 1)
-		line = strings.Replace(line, "Crawl-delay:", "<span class='"+StyleKeyword+"'>Crawl-delay:</span>", 1)
-		line = strings.Replace(line, "Sitemap:", "<span class='"+StyleKeyword+"'>Sitemap:</span>", 1)
-		line = strings.Replace(line, "Host:", "<span class='"+StyleKeyword+"'>Host:</span>", 1)
+		line = replacePrefix(line, "Allow:", "<span class='"+StyleKeyword+"'>Allow:</span>")
+		line = replacePrefix(line, "Crawl-delay:", "<span class='"+StyleKeyword+"'>Crawl-delay:</span>")
+		line = replacePrefix(line, "Sitemap:", "<span class='"+StyleKeyword+"'>Sitemap:</span>")
+		line = replacePrefix(line, "Host:", "<span class='"+StyleKeyword+"'>Host:</span>")
 
 		if linesNum != i+1 {
 			result = result + line + "\n"

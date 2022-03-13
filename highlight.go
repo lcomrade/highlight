@@ -53,3 +53,12 @@ func ByName(code string, language string) (string, error) {
 
 	return "", errors.New("highlight: unknown language name: " + language)
 }
+
+// Replace line prefix if it exist.
+func replacePrefix(line string, prefixOld string, prefixNew string) string {
+	if strings.HasPrefix(line, prefixOld) {
+		return prefixNew + line[len(prefixOld):]
+	}
+
+	return line
+}

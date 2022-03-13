@@ -40,6 +40,14 @@ test
 		},
 		{
 			Input: `
+  Allow: /
+`,
+			ExpectResult: `
+  Allow: /
+`,
+		},
+		{
+			Input: `
 User-agent: * # comment
 Disallow: /faq
 
