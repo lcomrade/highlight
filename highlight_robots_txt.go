@@ -39,6 +39,9 @@ import (
 func RobotsTxt(code string) string {
 	var result string = ""
 
+	// Shild HTML
+	code = shieldHTML(code)
+
 	lines := strings.Split(code, "\n")
 	linesNum := len(lines)
 

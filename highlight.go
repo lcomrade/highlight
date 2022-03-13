@@ -58,6 +58,30 @@ func ByName(code string, language string) (string, error) {
 	return "", errors.New("highlight: unknown language name: " + language)
 }
 
+// Shields HTML tags.
+func shieldHTML(code string) string {
+	var result string = ""
+
+	codeRune := []rune(code)
+
+	for i := range codeRune {
+		char := string(codeRune[i])
+
+		switch char {
+		case "<":
+			result = result + "&lt"
+		case ">":
+			result = result + "&gt"
+		case "&":
+			result = result + "&amp"
+		default:
+			result = result + char
+		}
+	}
+
+	return result
+}
+
 // Replace line prefix if it exist.
 func replacePrefix(line string, prefixOld string, prefixNew string) string {
 	if strings.HasPrefix(line, prefixOld) {
