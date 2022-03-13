@@ -17,6 +17,43 @@ Or you can use a mirror:
 go get git.lcomrade.su/root/highlight
 ```
 
+
+## How it works?
+The `<span>` tag is used to highlight syntax when converting to HTML.
+This tag does not do anything on its own,
+but you can assign different properties to it in CSS.
+Including color and font.
+
+Before highlighting:
+```robots.txt
+User-agent: * # comment
+Disallow: /faq
+
+# comment 1
+# comment 2
+
+Allow: /
+Crawl-delay: 10
+Sitemap: https://example.org/sitemap.xml
+Host: https://mirror.example.org
+```
+
+After highlighting:
+```html
+<span class='code-k'>User-agent:</span> * <span class='code-c'># comment</span>
+<span class='code-k'>Disallow:</span> /faq
+
+<span class='code-c'># comment 1</span>
+<span class='code-c'># comment 2</span>
+
+<span class='code-k'>Allow:</span> /
+<span class='code-k'>Crawl-delay:</span> 10
+<span class='code-k'>Sitemap:</span> https://example.org/sitemap.xml
+<span class='code-k'>Host:</span> https://mirror.example.org
+```
+
+
 ## Documentation
 - Offline documentation: `go doc -all github.com/lcomrade/highlight`
 - [Online documentation](https://pkg.go.dev/github.com/lcomrade/highlight#section-documentation)
+- [Changelog](CHANGELOG.md)

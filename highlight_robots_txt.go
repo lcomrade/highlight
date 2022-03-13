@@ -22,7 +22,7 @@ import (
 	"strings"
 )
 
-// Processes robots.txt files (Robots exclusion standard).
+// RobotsTxt processes robots.txt files (Robots exclusion standard).
 // Read more: https://en.wikipedia.org/wiki/Robots_exclusion_standard
 //
 // Supports standard directives:

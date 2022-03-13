@@ -23,10 +23,12 @@ import (
 	"strings"
 )
 
-var (
-	ErrFormatName = errors.New("unknown format name")
-)
-
+// These constants describe the name of the class
+// that will be assigned to the HTML tag '<span>'.
+//
+// Examples:
+//   <span style='code-k'>User-Agent:</span>
+//   <span style='code-c'># My comment</span>
 const (
 	StyleKeyword = "code-k"
 	StyleArg     = "code-a"
@@ -34,6 +36,13 @@ const (
 	StyleComment = "code-c"
 )
 
+// ByName helps to highlight code based on the language name.
+// This can be useful for Markdown and some other cases.
+// The name of the language is not case sensitive.
+//
+//   | Function name | Language name |
+//   |---------------|---------------|
+//   | RobotsTxt     | robots.txt    |
 func ByName(code string, language string) (string, error) {
 	language = strings.ToLower(language)
 
@@ -42,5 +51,5 @@ func ByName(code string, language string) (string, error) {
 		return RobotsTxt(code), nil
 	}
 
-	return "", ErrFormatName
+	return "", errors.New("highlight: unknown language name: " + language)
 }
