@@ -34,6 +34,8 @@ import (
 //   Crawl-delay
 //   Sitemap
 //   Host
+//
+// Comments (#) are also supported.
 func RobotsTxt(code string) string {
 	var result string = ""
 

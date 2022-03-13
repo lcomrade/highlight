@@ -42,11 +42,15 @@ const (
 //
 //   | Function name | Language name |
 //   |---------------|---------------|
+//   | Dockerfile    | dockerfile    |
 //   | RobotsTxt     | robots.txt    |
 func ByName(code string, language string) (string, error) {
 	language = strings.ToLower(language)
 
 	switch strings.ToLower(language) {
+	case "dockerfile":
+		return Dockerfile(code), nil
+
 	case "robots.txt":
 		return RobotsTxt(code), nil
 	}
@@ -58,6 +62,31 @@ func ByName(code string, language string) (string, error) {
 func replacePrefix(line string, prefixOld string, prefixNew string) string {
 	if strings.HasPrefix(line, prefixOld) {
 		return prefixNew + line[len(prefixOld):]
+	}
+
+	return line
+}
+
+// Processes '#' (sharp) comments.
+func formatSharpComment(line string) string {
+	lineRune := []rune(line)
+	line = ""
+	commentFound := false
+
+	for _, charRune := range lineRune {
+		char := string(charRune)
+
+		if commentFound == false && char == "#" {
+			line = line + "<span class='" + StyleComment + "'>#"
+			commentFound = true
+			continue
+		}
+
+		line = line + char
+	}
+
+	if commentFound == true {
+		line = line + "</span>"
 	}
 
 	return line
