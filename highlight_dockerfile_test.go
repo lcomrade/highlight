@@ -48,6 +48,14 @@ FROMalpine
 		},
 		{
 			Input: `
+# RUN rf -rf /
+`,
+			ExpectResult: `
+<span class='code-c'># RUN rf -rf /</span>
+`,
+		},
+		{
+			Input: `
 FROM python:3-alpine
 
 # comment 1

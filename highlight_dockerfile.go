@@ -55,31 +55,27 @@ func Dockerfile(code string) string {
 	lines := strings.Split(code, "\n")
 	linesNum := len(lines)
 
+	// Commands list
+	commands := []string{
+		"FROM", "RUN", "CMD",
+		"LABEL", "MAINTAINER", "EXPOSE",
+		"ENV", "ADD", "COPY",
+		"ENTRYPOINT", "VOLUME", "USER",
+		"WORKDIR", "ARG", "ONBUILD",
+		"STOPSIGNAL", "HEALTHCHECK", "SHELL",
+	}
+
 	for i := range lines {
 		line := lines[i]
 		// Comment
 		line = formatSharpComment(line)
 
 		// Commands
-		line = strings.Replace(line, "FROM ", "<span class='"+StyleKeyword+"'>FROM</span> ", 1)
-		line = strings.Replace(line, "RUN ", "<span class='"+StyleKeyword+"'>RUN</span> ", 1)
-		line = strings.Replace(line, "CMD ", "<span class='"+StyleKeyword+"'>CMD</span> ", 1)
-		line = strings.Replace(line, "LABEL ", "<span class='"+StyleKeyword+"'>LABEL</span> ", 1)
-		line = strings.Replace(line, "MAINTAINER ", "<span class='"+StyleKeyword+"'>MAINTAINER</span> ", 1)
-		line = strings.Replace(line, "EXPOSE ", "<span class='"+StyleKeyword+"'>EXPOSE</span> ", 1)
-		line = strings.Replace(line, "ADD ", "<span class='"+StyleKeyword+"'>ADD</span> ", 1)
-		line = strings.Replace(line, "COPY ", "<span class='"+StyleKeyword+"'>COPY</span> ", 1)
-		line = strings.Replace(line, "ENTRYPOINT ", "<span class='"+StyleKeyword+"'>ENTRYPOINT</span> ", 1)
-		line = strings.Replace(line, "VOLUME ", "<span class='"+StyleKeyword+"'>VOLUME</span> ", 1)
-		line = strings.Replace(line, "USER ", "<span class='"+StyleKeyword+"'>USER</span> ", 1)
-		line = strings.Replace(line, "FROM ", "<span class='"+StyleKeyword+"'>FROM</span> ", 1)
-		line = strings.Replace(line, "WORKDIR ", "<span class='"+StyleKeyword+"'>WORKDIR</span> ", 1)
-		line = strings.Replace(line, "ARG ", "<span class='"+StyleKeyword+"'>ARG</span> ", 1)
-		line = strings.Replace(line, "ONBUILD ", "<span class='"+StyleKeyword+"'>ONBUILD</span> ", 1)
-		line = strings.Replace(line, "STOPSIGNAL ", "<span class='"+StyleKeyword+"'>STOPSIGNAL</span> ", 1)
-		line = strings.Replace(line, "HEALTHCHECK ", "<span class='"+StyleKeyword+"'>HEALTHCHECK</span> ", 1)
-		line = strings.Replace(line, "SHELL ", "<span class='"+StyleKeyword+"'>SHELL</span> ", 1)
+		for _, cmd := range commands {
+			line = formatCommand(line, cmd, []string{"", " "}, []string{"", " "})
+		}
 
+		// Save
 		if linesNum != i+1 {
 			result = result + line + "\n"
 		} else {

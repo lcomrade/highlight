@@ -48,6 +48,14 @@ test
 		},
 		{
 			Input: `
+# Allow:
+`,
+			ExpectResult: `
+<span class='code-c'># Allow:</span>
+`,
+		},
+		{
+			Input: `
 User-agent: * # comment
 Disallow: /faq
 

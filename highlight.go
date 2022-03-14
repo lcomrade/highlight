@@ -91,6 +91,87 @@ func replacePrefix(line string, prefixOld string, prefixNew string) string {
 	return line
 }
 
+// Processes command.
+// Content inside <span>....</span> is ignored.
+// It is assumed that all HTML tags except <span>....</span> were shielded.
+func formatCommand(line string, command string, cmdStartChars []string, cmdEndChars []string) string {
+	result := ""
+
+	lineRune := []rune(line)
+	lineLen := len(lineRune)
+	commandLen := len(command)
+
+	//otherSpanTagOpen := 0
+	skip := 0
+
+	for i, _ := range lineRune {
+		char := string(lineRune[i])
+
+		// Skip
+		if skip != 0 {
+			skip = skip - 1
+			continue
+		}
+
+		// Get last char
+		lastChar := ""
+
+		if i != 0 {
+			lastChar = string(lineRune[i-1])
+		}
+
+		// Get command end char
+		cmdEndChar := ""
+
+		if i > i+commandLen+1 {
+			cmdEndChar = string(lineRune[commandLen+i+1])
+		}
+
+		// Get sub string
+		subLine := ""
+
+		if lineLen > i+commandLen {
+			subLine = line[i : commandLen+i]
+		}
+
+		// Check sub string
+		if subLine == command {
+			okStart := false
+			okEnd := false
+
+			// Check command start char
+			for _, ch := range cmdStartChars {
+				if ch == lastChar {
+					okStart = true
+					break
+				}
+			}
+
+			// Check command end char
+			for _, ch := range cmdEndChars {
+				if ch == cmdEndChar {
+					okStart = true
+					break
+				}
+			}
+
+			// Save
+			if okStart == true && okEnd == true {
+				result = result + "<span class='" + StyleKeyword + "'>" + command + "</span>"
+				skip = commandLen - 1
+
+			} else {
+				result = result + char
+			}
+
+		} else {
+			result = result + char
+		}
+	}
+
+	return result
+}
+
 // Processes '#' (sharp) comments.
 func formatSharpComment(line string) string {
 	lineRune := []rune(line)
