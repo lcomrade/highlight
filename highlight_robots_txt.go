@@ -49,25 +49,7 @@ func RobotsTxt(code string) string {
 		line := lines[i]
 
 		// Comment
-		lineRune := []rune(line)
-		line = ""
-		commentFound := false
-
-		for _, charRune := range lineRune {
-			char := string(charRune)
-
-			if commentFound == false && char == "#" {
-				line = line + "<span class='" + StyleComment + "'>#"
-				commentFound = true
-				continue
-			}
-
-			line = line + char
-		}
-
-		if commentFound == true {
-			line = line + "</span>"
-		}
+		line = formatSharpComment(line)
 
 		// Standard
 		line = replacePrefix(line, "User-agent:", "<span class='"+StyleKeyword+"'>User-agent:</span>")
