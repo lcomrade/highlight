@@ -30,26 +30,31 @@ import (
 //   <span style='code-k'>User-Agent:</span>
 //   <span style='code-c'># My comment</span>
 const (
-	StyleKeyword = "code-k"
-	StyleArg     = "code-a"
-	StyleVar     = "code-v"
-	StyleComment = "code-c"
+	StyleKeyword     = "code-k"
+	StyleArg         = "code-a"
+	StyleBuildInVar  = "code-bv"
+	StyleBuildInFunc = "code-bf"
+	StyleComment     = "code-c"
 )
 
 // ByName helps to highlight code based on the language name.
 // This can be useful for Markdown and some other cases.
 // The name of the language is not case sensitive.
 //
-//   | Function name | Language name |
-//   |---------------|---------------|
-//   | Dockerfile    | dockerfile    |
-//   | RobotsTxt     | robots.txt    |
+//   | Function name | Language name   |
+//   |---------------|-----------------|
+//   | Dockerfile    | dockerfile      |
+//   | Python        | python, python3 |
+//   | RobotsTxt     | robots.txt      |
 func ByName(code string, language string) (string, error) {
 	language = strings.ToLower(language)
 
 	switch strings.ToLower(language) {
 	case "dockerfile":
 		return Dockerfile(code), nil
+
+	case "python", "python3":
+		return Python(code), nil
 
 	case "robots.txt":
 		return RobotsTxt(code), nil
@@ -91,10 +96,10 @@ func replacePrefix(line string, prefixOld string, prefixNew string) string {
 	return line
 }
 
-// Processes command.
+// Processes keywords.
 // Content inside <span>....</span> is ignored.
 // It is assumed that all HTML tags except <span>....</span> were shielded.
-func formatCommand(line string, command string, cmdStartChars []string, cmdEndChars []string) string {
+func formatWord(line string, command string, cmdStartChars []string, cmdEndChars []string, styleClass string) string {
 	result := ""
 
 	lineRune := []rune(line)
@@ -171,7 +176,7 @@ func formatCommand(line string, command string, cmdStartChars []string, cmdEndCh
 
 			// Save
 			if okStart == true && okEnd == true {
-				result = result + "<span class='" + StyleKeyword + "'>" + command + "</span>"
+				result = result + "<span class='" + styleClass + "'>" + command + "</span>"
 				skip = commandLen - 1
 
 			} else {

@@ -72,7 +72,7 @@ func Dockerfile(code string) string {
 
 		// Commands
 		for _, cmd := range commands {
-			line = formatCommand(line, cmd, []string{"", " "}, []string{"", " "})
+			line = formatWord(line, cmd, []string{"", " ", "	"}, []string{"", " ", "	"}, StyleKeyword)
 		}
 
 		// Save
