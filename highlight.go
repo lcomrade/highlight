@@ -101,10 +101,10 @@ func formatCommand(line string, command string, cmdStartChars []string, cmdEndCh
 	lineLen := len(lineRune)
 	commandLen := len(command)
 
-	//otherSpanTagOpen := 0
+	otherSpanTagOpen := 0
 	skip := 0
 
-	for i, _ := range lineRune {
+	for i := range lineRune {
 		char := string(lineRune[i])
 
 		// Skip
@@ -123,19 +123,33 @@ func formatCommand(line string, command string, cmdStartChars []string, cmdEndCh
 		// Get command end char
 		cmdEndChar := ""
 
-		if i > i+commandLen+1 {
-			cmdEndChar = string(lineRune[commandLen+i+1])
+		if lineLen > i+commandLen {
+			cmdEndChar = string(lineRune[i+commandLen])
 		}
 
 		// Get sub string
 		subLine := ""
 
 		if lineLen > i+commandLen {
-			subLine = line[i : commandLen+i]
+			subLine = line[i : i+commandLen]
+		}
+
+		// Find <span
+		if lineLen > i+5 {
+			if line[i:i+5] == "<span" {
+				otherSpanTagOpen = otherSpanTagOpen + 1
+			}
+		}
+
+		// Find </span>
+		if lineLen > i+7 {
+			if line[i:i+7] == "</span>" {
+				otherSpanTagOpen = otherSpanTagOpen - 1
+			}
 		}
 
 		// Check sub string
-		if subLine == command {
+		if subLine == command && otherSpanTagOpen == 0 {
 			okStart := false
 			okEnd := false
 
@@ -150,7 +164,7 @@ func formatCommand(line string, command string, cmdStartChars []string, cmdEndCh
 			// Check command end char
 			for _, ch := range cmdEndChars {
 				if ch == cmdEndChar {
-					okStart = true
+					okEnd = true
 					break
 				}
 			}
