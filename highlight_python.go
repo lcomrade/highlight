@@ -233,8 +233,12 @@ func Python(code string) string {
 	// Run parser
 	for i := range lines {
 		line := lines[i]
+
 		// Comment
 		line = formatSharpComment(line)
+
+		// Brackets
+		line = formatBrackets(line)
 
 		// Keywords
 		for _, word := range keywords {

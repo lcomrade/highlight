@@ -81,7 +81,7 @@ CMD [ "python", "./main.py" ]
 
 <span class='` + StyleKeyword + `'>VOLUME</span> /data
 
-<span class='` + StyleKeyword + `'>CMD</span> [ "python", "./main.py" ]
+<span class='` + StyleKeyword + `'>CMD</span> [ <span class='` + StyleBrackets + `'>"python"</span>, <span class='` + StyleBrackets + `'>"./main.py"</span> ]
 `,
 		},
 	}

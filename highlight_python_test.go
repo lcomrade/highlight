@@ -44,8 +44,8 @@ test
 #	main()
 `,
 			ExpectResult: `
-<span class='code-c'># if __name__ == "__main__":</span>
-<span class='code-c'>#	main()</span>
+<span class='` + StyleComment + `'># if __name__ == "__main__":</span>
+<span class='` + StyleComment + `'>#	main()</span>
 `,
 		},
 		{
@@ -68,21 +68,21 @@ if __name__ == "__main__":
 	main()
 `,
 			ExpectResult: `
-<span class='code-c'>#!/usr/bin/python3</span>
+<span class='` + StyleComment + `'>#!/usr/bin/python3</span>
 
-<span class='code-k'>def</span> main() -&gt <span class='code-k'>None</span>:
-	name = <span class='code-bf'>input</span>("Your name:")
+<span class='` + StyleKeyword + `'>def</span> main() -&gt <span class='code-k'>None</span>:
+	name = <span class='` + StyleBuildInFunc + `'>input</span>(<span class='` + StyleBrackets + `'>"Your name:"</span>)
 
-	<span class='code-k'>if</span> name == "Ivan" <span class='code-k'>or</span> name == "Nikolai":
-		<span class='code-bf'>print</span>("Vodka, matryoshka, balalaika!")
+	<span class='` + StyleKeyword + `'>if</span> name == <span class='` + StyleBrackets + `'>"Ivan"</span> <span class='` + StyleKeyword + `'>or</span> name == <span class='` + StyleBrackets + `'>"Nikolai"</span>:
+		<span class='` + StyleBuildInFunc + `'>print</span>(<span class='` + StyleBrackets + `'>"Vodka, matryoshka, balalaika!"</span>)
 		
-	<span class='code-k'>elif</span> name == "Franklin":
-		<span class='code-bf'>print</span>("Greetings, USA President!")
+	<span class='` + StyleKeyword + `'>elif</span> name == <span class='` + StyleBrackets + `'>"Franklin"</span>:
+		<span class='` + StyleBuildInFunc + `'>print</span>(<span class='` + StyleBrackets + `'>"Greetings, USA President!"</span>)
 
-	<span class='code-k'>else</span>:
-		<span class='code-bf'>print</span>("I don't know what to say about that name:(")
+	<span class='` + StyleKeyword + `'>else</span>:
+		<span class='` + StyleBuildInFunc + `'>print</span>(<span class='` + StyleBrackets + `'>"I don't know what to say about that name:("</span>)
 
-<span class='code-k'>if</span> <span class='code-bv'>__name__</span> == "__main__":
+<span class='` + StyleKeyword + `'>if</span> <span class='` + StyleBuildInVar + `'>__name__</span> == <span class='` + StyleBrackets + `'>"__main__"</span>:
 	main()
 `,
 		},

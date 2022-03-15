@@ -30,11 +30,12 @@ import (
 //   <span style='code-k'>User-Agent:</span>
 //   <span style='code-c'># My comment</span>
 const (
-	StyleKeyword     = "code-k"
-	StyleArg         = "code-a"
-	StyleBuildInVar  = "code-bv"
-	StyleBuildInFunc = "code-bf"
+	StyleKeyword = "code-k"
+	//	StyleArg         = "code-a"
+	StyleBuildInVar  = "code-bi-v"
+	StyleBuildInFunc = "code-bi-f"
 	StyleComment     = "code-c"
+	StyleBrackets    = "code-b"
 )
 
 // ByName helps to highlight code based on the language name.
@@ -186,6 +187,74 @@ func formatWord(line string, command string, cmdStartChars []string, cmdEndChars
 		} else {
 			result = result + char
 		}
+	}
+
+	return result
+}
+
+// Processes `"` and `'` brackets.
+func formatBrackets(text string) string {
+	result := ""
+
+	textRune := []rune(text)
+	textLen := len(textRune)
+
+	otherSpanTagOpen := 0
+	markOpen := false       // `"`
+	singleMarkOpen := false // `'`
+
+	for i := range textRune {
+		char := string(textRune[i])
+
+		// Find <span
+		if textLen > i+5 {
+			if text[i:i+5] == "<span" {
+				otherSpanTagOpen = otherSpanTagOpen + 1
+			}
+		}
+
+		// Find </span>
+		if textLen > i+7 {
+			if text[i:i+7] == "</span>" {
+				otherSpanTagOpen = otherSpanTagOpen - 1
+			}
+		}
+
+		// Check
+		if char == `"` && singleMarkOpen == false && otherSpanTagOpen == 0 {
+			if markOpen == false {
+				result = result + "<span class='" + StyleBrackets + "'>" + `"`
+				markOpen = true
+
+			} else {
+				result = result + `"` + "</span>"
+				markOpen = false
+			}
+
+		} else if char == `'` && markOpen == false && otherSpanTagOpen == 0 {
+			if singleMarkOpen == false {
+				result = result + "<span class='" + StyleBrackets + "'>" + `'`
+				singleMarkOpen = true
+
+			} else {
+				result = result + `'` + "</span>"
+				singleMarkOpen = false
+			}
+
+		} else {
+			result = result + char
+		}
+	}
+
+	// Close not closed <span> tags
+	if markOpen == true {
+		result = result + "</span>"
+		markOpen = false
+	}
+
+	if singleMarkOpen == true {
+		result = result + "</span>"
+		singleMarkOpen = false
 	}
 
 	return result

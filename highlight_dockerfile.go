@@ -70,6 +70,9 @@ func Dockerfile(code string) string {
 		// Comment
 		line = formatSharpComment(line)
 
+		// Brackets
+		line = formatBrackets(line)
+
 		// Commands
 		for _, cmd := range commands {
 			line = formatWord(line, cmd, []string{"", " ", "	"}, []string{"", " ", "	"}, StyleKeyword)
