@@ -266,9 +266,12 @@ func formatBrackets(text string) string {
 
 // Processes '//' (C-like) comments.
 func formatCComment(line string) string {
+	result := ""
+
 	lineRune := []rune(line)
 	lineLen := len(lineRune)
-	line = ""
+
+	otherSpanTagOpen := 0
 	commentFound := false
 
 	for i, charRune := range lineRune {
@@ -282,43 +285,77 @@ func formatCComment(line string) string {
 			nextChar = string(lineRune[i+1])
 		}
 
-		if commentFound == false && char == "/" && nextChar == "/" {
-			line = line + "<span class='" + StyleComment + "'>/"
+		// Find <span
+		if lineLen > i+5 {
+			if line[i:i+5] == "<span" {
+				otherSpanTagOpen = otherSpanTagOpen + 1
+			}
+		}
+
+		// Find </span>
+		if lineLen > i+7 {
+			if line[i:i+7] == "</span>" {
+				otherSpanTagOpen = otherSpanTagOpen - 1
+			}
+		}
+
+		// Parse
+		if commentFound == false && char == "/" && nextChar == "/" && otherSpanTagOpen == 0 {
+			result = result + "<span class='" + StyleComment + "'>/"
 			commentFound = true
 			continue
 		}
 
-		line = line + char
+		result = result + char
 	}
 
 	if commentFound == true {
-		line = line + "</span>"
+		result = result + "</span>"
 	}
 
-	return line
+	return result
 }
 
 // Processes '#' (sharp) comments.
 func formatSharpComment(line string) string {
+	result := ""
+
 	lineRune := []rune(line)
-	line = ""
+	lineLen := len(lineRune)
+
+	otherSpanTagOpen := 0
 	commentFound := false
 
-	for _, charRune := range lineRune {
+	for i, charRune := range lineRune {
 		char := string(charRune)
 
-		if commentFound == false && char == "#" {
-			line = line + "<span class='" + StyleComment + "'>#"
+		// Find <span
+		if lineLen > i+5 {
+			if line[i:i+5] == "<span" {
+				otherSpanTagOpen = otherSpanTagOpen + 1
+			}
+		}
+
+		// Find </span>
+		if lineLen > i+7 {
+			if line[i:i+7] == "</span>" {
+				otherSpanTagOpen = otherSpanTagOpen - 1
+			}
+		}
+
+		// Parse
+		if commentFound == false && char == "#" && otherSpanTagOpen == 0 {
+			result = result + "<span class='" + StyleComment + "'>#"
 			commentFound = true
 			continue
 		}
 
-		line = line + char
+		result = result + char
 	}
 
 	if commentFound == true {
-		line = line + "</span>"
+		result = result + "</span>"
 	}
 
-	return line
+	return result
 }
