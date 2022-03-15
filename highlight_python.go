@@ -144,7 +144,7 @@ import (
 //   zip()
 //   __import__()
 //
-// Single-line comments (#) are also supported.
+// Single-line comments (#) and brackets(", ') are also supported.
 func Python(code string) string {
 	var result string = ""
 

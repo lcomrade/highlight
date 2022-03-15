@@ -45,6 +45,7 @@ const (
 //   | Function name | Language name   |
 //   |---------------|-----------------|
 //   | Dockerfile    | dockerfile      |
+//   | Golang        | go, golang      |
 //   | Python        | python, python3 |
 //   | RobotsTxt     | robots.txt      |
 func ByName(code string, language string) (string, error) {
@@ -53,6 +54,9 @@ func ByName(code string, language string) (string, error) {
 	switch strings.ToLower(language) {
 	case "dockerfile":
 		return Dockerfile(code), nil
+
+	case "go", "golang":
+		return Golang(code), nil
 
 	case "python", "python3":
 		return Python(code), nil
@@ -258,6 +262,40 @@ func formatBrackets(text string) string {
 	}
 
 	return result
+}
+
+// Processes '//' (C-like) comments.
+func formatCComment(line string) string {
+	lineRune := []rune(line)
+	lineLen := len(lineRune)
+	line = ""
+	commentFound := false
+
+	for i, charRune := range lineRune {
+		// Current char
+		char := string(charRune)
+
+		// Get next char
+		nextChar := ""
+
+		if lineLen > i+1 {
+			nextChar = string(lineRune[i+1])
+		}
+
+		if commentFound == false && char == "/" && nextChar == "/" {
+			line = line + "<span class='" + StyleComment + "'>/"
+			commentFound = true
+			continue
+		}
+
+		line = line + char
+	}
+
+	if commentFound == true {
+		line = line + "</span>"
+	}
+
+	return line
 }
 
 // Processes '#' (sharp) comments.
