@@ -52,6 +52,31 @@ import (
 //   type
 //   var
 //
+// Supported operators (const StyleOperator):
+//   !
+//   !=
+//   %
+//   &
+//   &&
+//   &^
+//   *
+//   +
+//   -
+//   /
+//   <
+//   <-
+//   <<
+//   <=
+//   ==
+//   >
+//   >=
+//   >>
+//   ^
+//   |
+//   ||
+//   =
+//   :=
+//
 // Supported variable types (const StyleVarType):
 //   bool
 //   uint
@@ -83,7 +108,7 @@ func Golang(code string) string {
 	lines := strings.Split(code, "\n")
 	linesNum := len(lines)
 
-	// Keywords list
+	// Keywords
 	keywords := []string{
 		"break", "case", "chan",
 		"const", "continue", "default",
@@ -96,12 +121,18 @@ func Golang(code string) string {
 		"var",
 	}
 
-	cmdStartChars := []string{
+	cmdChars := []string{
 		"", " ", "\t", ":", ";", "(", ")",
 	}
 
-	cmdEndChars := []string{
-		"", " ", "\t", ":", ";", "(", ")",
+	// Operators
+	operators := []string{
+		"!", "!=", "%", "&",
+		"&&", "&^", "*", "+",
+		"-", "/", "<", "<-",
+		"<<", "<=", "==", ">",
+		">=", ">>", "^", "|",
+		"||", "=", ":=",
 	}
 
 	// Varibles types
@@ -127,12 +158,17 @@ func Golang(code string) string {
 
 		// Keywords
 		for _, word := range keywords {
-			line = formatWord(line, word, cmdStartChars, cmdEndChars, StyleKeyword)
+			line = formatWord(line, word, cmdChars, cmdChars, StyleKeyword)
+		}
+
+		// Operators
+		for _, word := range operators {
+			line = formatWord(line, word, cmdChars, cmdChars, StyleOperator)
 		}
 
 		// Varibles types
 		for _, word := range varTypes {
-			line = formatWord(line, word, cmdStartChars, cmdEndChars, StyleVarType)
+			line = formatWord(line, word, cmdChars, cmdChars, StyleVarType)
 		}
 
 		// Save

@@ -142,7 +142,7 @@ func formatWord(line string, command string, cmdStartChars []string, cmdEndChars
 		// Get sub string
 		subLine := ""
 
-		if lineLen > i+commandLen {
+		if lineLen > i+commandLen-1 {
 			subLine = line[i : i+commandLen]
 		}
 

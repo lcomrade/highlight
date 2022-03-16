@@ -48,8 +48,19 @@ import(
 
 func main() {
 	// comment
-	var string hi = "Hellow World!"
-	fmt.Println(hi)
+	var answer string
+	fmt.Println("Linux or FreeBSD? ")
+	fmt.Scanln(&answer)
+
+	if answer == "Linux" {
+		fmt.Println("The GPL is a good thing")
+		
+	} else if answer == "FreeBSD" {
+		fmt.Println("The ZFS file system is great for servers")
+		
+	} else {
+		fmt.Println("Unknown answer:(")
+	}
 }
 `,
 			ExpectResult: `
@@ -61,8 +72,19 @@ func main() {
 
 <span class='` + StyleKeyword + `'>func</span> main() {
 	<span class='` + StyleComment + `'>// comment</span>
-	<span class='` + StyleKeyword + `'>var</span> <span class='` + StyleVarType + `'>string</span> hi = <span class='` + StyleBrackets + `'>"Hellow World!"</span>
-	fmt.Println(hi)
+	<span class='` + StyleKeyword + `'>var</span> answer <span class='` + StyleVarType + `'>string</span>
+	fmt.Println(<span class='`+StyleBrackets+`'>"Linux or FreeBSD? "</span>)
+	fmt.Scanln(&ampanswer)
+
+	<span class='`+StyleKeyword+`'>if</span> answer <span class='`+StyleOperator+`'>==</span> <span class='`+StyleBrackets+`'>"Linux"</span> {
+		fmt.Println(<span class='`+StyleBrackets+`'>"The GPL is a good thing"</span>)
+		
+	} <span class='`+StyleKeyword+`'>else</span> <span class='`+StyleKeyword+`'>if</span> answer <span class='`+StyleOperator+`'>==</span> <span class='`+StyleBrackets+`'>"FreeBSD"</span> {
+		fmt.Println(<span class='`+StyleBrackets+`'>"The ZFS file system is great for servers"</span>)
+		
+	} <span class='`+StyleKeyword+`'>else</span> {
+		fmt.Println(<span class='`+StyleBrackets+`'>"Unknown answer:("</span>)
+	}
 }
 `,
 		},
