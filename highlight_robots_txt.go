@@ -25,11 +25,11 @@ import (
 // RobotsTxt processes robots.txt files (Robots exclusion standard).
 // Read more: https://en.wikipedia.org/wiki/Robots_exclusion_standard
 //
-// Supports standard directives:
+// Supports standard directives (const StyleKeyword):
 //   User-agent
 //   Disallow
 //
-// And nonstandard extensions:
+// And nonstandard extensions (const StyleKeyword):
 //   Allow
 //   Crawl-delay
 //   Sitemap

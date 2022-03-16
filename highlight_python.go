@@ -25,7 +25,7 @@ import (
 // Python processes python source code (*.py files).
 // Read more: https://docs.python.org/3/reference/index.html
 //
-// Supported keywords:
+// Supported keywords (const StyleKeyword):
 //   False
 //   None
 //   True
@@ -62,7 +62,7 @@ import (
 //   with
 //   yield
 //
-// Supported import-related module attributes:
+// Supported import-related module attributes (const StyleBuildInVar):
 //   __name__
 //   __loader__
 //   __package__
@@ -71,7 +71,7 @@ import (
 //   __file__
 //   __cached__
 //
-// Supported built-in functions:
+// Supported built-in functions (const StyleBuildInFunc):
 //   abs()
 //   aiter()
 //   all()
@@ -171,11 +171,11 @@ func Python(code string) string {
 	}
 
 	cmdStartChars := []string{
-		"", " ", "	", ":", ";", "(", ")",
+		"", " ", "\t", ":", ";", "(", ")",
 	}
 
 	cmdEndChars := []string{
-		"", " ", "	", ":", ";", "(", ")",
+		"", " ", "\t", ":", ";", "(", ")",
 	}
 
 	// Build-in vars
@@ -223,11 +223,11 @@ func Python(code string) string {
 	}
 
 	funcStartChars := []string{
-		"", " ", "	", ":", ";", "(", ")",
+		"", " ", "\t", ":", ";", "(", ")",
 	}
 
 	funcEndChars := []string{
-		"", " ", "	", ":", ";", "(", ")",
+		"", " ", "\t", ":", ";", "(", ")",
 	}
 
 	// Run parser

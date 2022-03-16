@@ -25,7 +25,7 @@ import (
 // Golang processes go source code (*.go files).
 // Read more: https://go.dev/ref/spec
 //
-// Supported keywords:
+// Supported keywords (const StyleKeyword):
 //   break
 //   case
 //   chan
@@ -52,7 +52,7 @@ import (
 //   type
 //   var
 //
-// Supported variable types:
+// Supported variable types (const StyleVarType):
 //   bool
 //   uint
 //   uint8
@@ -97,11 +97,11 @@ func Golang(code string) string {
 	}
 
 	cmdStartChars := []string{
-		"", " ", "	", ":", ";", "(", ")",
+		"", " ", "\t", ":", ";", "(", ")",
 	}
 
 	cmdEndChars := []string{
-		"", " ", "	", ":", ";", "(", ")",
+		"", " ", "\t", ":", ";", "(", ")",
 	}
 
 	// Varibles types

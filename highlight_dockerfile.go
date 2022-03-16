@@ -25,7 +25,7 @@ import (
 // Dockerfile processes Docker builder files.
 // Read more: https://docs.docker.com/engine/reference/builder/
 //
-// Supported commands:
+// Supported commands (const StyleKeyword):
 //   FROM
 //   RUN
 //   CMD
@@ -75,7 +75,7 @@ func Dockerfile(code string) string {
 
 		// Commands
 		for _, cmd := range commands {
-			line = formatWord(line, cmd, []string{"", " ", "	"}, []string{"", " ", "	"}, StyleKeyword)
+			line = formatWord(line, cmd, []string{"", " ", "\t"}, []string{"", " ", "\t"}, StyleKeyword)
 		}
 
 		// Save
