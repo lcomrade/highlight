@@ -22,8 +22,8 @@ import (
 	"strings"
 )
 
-// Python processes python source code (*.py files).
-// Read more: https://docs.python.org/3/reference/index.html
+// Golang processes go source code (*.go files).
+// Read more: https://go.dev/ref/spec
 //
 // Supported keywords:
 //   break
@@ -52,7 +52,28 @@ import (
 //   type
 //   var
 //
-// Single-line comments (#) and brackets(", ') are also supported.
+// Supported variable types:
+//   bool
+//   uint
+//   uint8
+//   uint16
+//   uint32
+//   uint64
+//   uintptr
+//   int
+//   int8
+//   int16
+//   int32
+//   int64
+//   float32
+//   float64
+//   complex64
+//   complex128
+//   byte
+//   rune
+//   string
+//
+// Single-line comments (//) and brackets(", ') are also supported.
 func Golang(code string) string {
 	var result string = ""
 
@@ -83,6 +104,17 @@ func Golang(code string) string {
 		"", " ", "	", ":", ";", "(", ")",
 	}
 
+	// Varibles types
+	varTypes := []string{
+		"bool", "uint", "uint8",
+		"uint16", "uint32", "uint64",
+		"uintptr", "int", "int8",
+		"int16", "int32", "int64",
+		"float32", "float64", "complex64",
+		"complex128", "byte", "rune",
+		"string",
+	}
+
 	// Run parser
 	for i := range lines {
 		line := lines[i]
@@ -96,6 +128,11 @@ func Golang(code string) string {
 		// Keywords
 		for _, word := range keywords {
 			line = formatWord(line, word, cmdStartChars, cmdEndChars, StyleKeyword)
+		}
+
+		// Varibles types
+		for _, word := range varTypes {
+			line = formatWord(line, word, cmdStartChars, cmdEndChars, StyleVarType)
 		}
 
 		// Save

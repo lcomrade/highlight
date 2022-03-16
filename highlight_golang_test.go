@@ -48,7 +48,8 @@ import(
 
 func main() {
 	// comment
-	fmt.Println("Hellow World!")
+	var string hi = "Hellow World!"
+	fmt.Println(hi)
 }
 `,
 			ExpectResult: `
@@ -60,7 +61,8 @@ func main() {
 
 <span class='` + StyleKeyword + `'>func</span> main() {
 	<span class='` + StyleComment + `'>// comment</span>
-	fmt.Println(<span class='` + StyleBrackets + `'>"Hellow World!"</span>)
+	<span class='` + StyleKeyword + `'>var</span> <span class='` + StyleVarType + `'>string</span> hi = <span class='` + StyleBrackets + `'>"Hellow World!"</span>
+	fmt.Println(hi)
 }
 `,
 		},
