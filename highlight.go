@@ -30,8 +30,9 @@ import (
 //   <span style='code-k'>User-Agent:</span>
 //   <span style='code-c'># My comment</span>
 const (
-	StyleKeyword = "code-k"
-	StyleVarType = "code-vt"
+	StyleKeyword  = "code-k"
+	StyleOperator = "code-o"
+	StyleVarType  = "code-vt"
 	//	StyleArg         = "code-a"
 	StyleBuildInVar  = "code-bi-v"
 	StyleBuildInFunc = "code-bi-f"

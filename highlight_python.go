@@ -62,6 +62,29 @@ import (
 //   with
 //   yield
 //
+// Supported operators (const StyleOperator):
+//   +
+//   -
+//   *
+//   **
+//   /
+//   //
+//   %
+//   @
+//   <<
+//   >>
+//   &
+//   |
+//   ^
+//   ~
+//   :=
+//   <
+//   >
+//   <=
+//   >=
+//   ==
+//   !=
+//
 // Supported import-related module attributes (const StyleBuildInVar):
 //   __name__
 //   __loader__
@@ -154,7 +177,7 @@ func Python(code string) string {
 	lines := strings.Split(code, "\n")
 	linesNum := len(lines)
 
-	// Keywords list
+	// Keywords
 	keywords := []string{
 		"False", "None", "True",
 		"and", "as", "assert",
@@ -170,12 +193,21 @@ func Python(code string) string {
 		"with", "yield",
 	}
 
-	cmdStartChars := []string{
+	cmdChars := []string{
 		"", " ", "\t", ":", ";", "(", ")",
 	}
 
-	cmdEndChars := []string{
-		"", " ", "\t", ":", ";", "(", ")",
+	// Operators
+	operators := []string{
+		"+", "-", "*", "**",
+		"%", "@", "<<", ">>",
+		"&", "|", "^", "~",
+		":=", "<", ">", "<=",
+		">=", "==", "!=",
+	}
+
+	opsChars := []string{
+		"", " ", "\t", ":", "(", ")",
 	}
 
 	// Build-in vars
@@ -186,12 +218,8 @@ func Python(code string) string {
 		"__cached__",
 	}
 
-	varStartChars := []string{
-		"", " ", "	", ":", "(", ")",
-	}
-
-	varEndChars := []string{
-		"", " ", "	", ":", "(", ")",
+	varChars := []string{
+		"", " ", "\t", ":", "(", ")",
 	}
 
 	// Build-in functions
@@ -222,11 +250,7 @@ func Python(code string) string {
 		"zip", "__import__",
 	}
 
-	funcStartChars := []string{
-		"", " ", "\t", ":", ";", "(", ")",
-	}
-
-	funcEndChars := []string{
+	funcChars := []string{
 		"", " ", "\t", ":", ";", "(", ")",
 	}
 
@@ -242,17 +266,22 @@ func Python(code string) string {
 
 		// Keywords
 		for _, word := range keywords {
-			line = formatWord(line, word, cmdStartChars, cmdEndChars, StyleKeyword)
+			line = formatWord(line, word, cmdChars, cmdChars, StyleKeyword)
+		}
+
+		// Operators
+		for _, word := range operators {
+			line = formatWord(line, word, opsChars, opsChars, StyleOperator)
 		}
 
 		// Build-in vars
 		for _, word := range buildInVars {
-			line = formatWord(line, word, varStartChars, varEndChars, StyleBuildInVar)
+			line = formatWord(line, word, varChars, varChars, StyleBuildInVar)
 		}
 
 		// Build-in functions
 		for _, word := range buildInFuncs {
-			line = formatWord(line, word, funcStartChars, funcEndChars, StyleBuildInFunc)
+			line = formatWord(line, word, funcChars, funcChars, StyleBuildInFunc)
 		}
 
 		// Save

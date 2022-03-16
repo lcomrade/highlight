@@ -73,16 +73,16 @@ if __name__ == "__main__":
 <span class='` + StyleKeyword + `'>def</span> main() -&gt <span class='code-k'>None</span>:
 	name = <span class='` + StyleBuildInFunc + `'>input</span>(<span class='` + StyleBrackets + `'>"Your name:"</span>)
 
-	<span class='` + StyleKeyword + `'>if</span> name == <span class='` + StyleBrackets + `'>"Ivan"</span> <span class='` + StyleKeyword + `'>or</span> name == <span class='` + StyleBrackets + `'>"Nikolai"</span>:
+	<span class='` + StyleKeyword + `'>if</span> name <span class='` + StyleOperator + `'>==</span> <span class='` + StyleBrackets + `'>"Ivan"</span> <span class='` + StyleKeyword + `'>or</span> name <span class='` + StyleOperator + `'>==</span> <span class='` + StyleBrackets + `'>"Nikolai"</span>:
 		<span class='` + StyleBuildInFunc + `'>print</span>(<span class='` + StyleBrackets + `'>"Vodka, matryoshka, balalaika!"</span>)
 		
-	<span class='` + StyleKeyword + `'>elif</span> name == <span class='` + StyleBrackets + `'>"Franklin"</span>:
+	<span class='` + StyleKeyword + `'>elif</span> name <span class='` + StyleOperator + `'>==</span> <span class='` + StyleBrackets + `'>"Franklin"</span>:
 		<span class='` + StyleBuildInFunc + `'>print</span>(<span class='` + StyleBrackets + `'>"Greetings, USA President!"</span>)
 
 	<span class='` + StyleKeyword + `'>else</span>:
 		<span class='` + StyleBuildInFunc + `'>print</span>(<span class='` + StyleBrackets + `'>"I don't know what to say about that name:("</span>)
 
-<span class='` + StyleKeyword + `'>if</span> <span class='` + StyleBuildInVar + `'>__name__</span> == <span class='` + StyleBrackets + `'>"__main__"</span>:
+<span class='` + StyleKeyword + `'>if</span> <span class='` + StyleBuildInVar + `'>__name__</span> <span class='` + StyleOperator + `'>==</span> <span class='` + StyleBrackets + `'>"__main__"</span>:
 	main()
 `,
 		},
