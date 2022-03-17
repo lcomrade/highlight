@@ -74,7 +74,7 @@ func main() {
 	<span class='` + StyleComment + `'>// comment</span>
 	<span class='` + StyleKeyword + `'>var</span> answer <span class='` + StyleVarType + `'>string</span>
 	fmt.Println(<span class='` + StyleBrackets + `'>"Linux or FreeBSD? "</span>)
-	fmt.Scanln(&ampanswer)
+	fmt.Scanln(<span class='` + StyleOperator + `'>&amp</span>answer)
 
 	<span class='` + StyleKeyword + `'>if</span> answer <span class='` + StyleOperator + `'>==</span> <span class='` + StyleBrackets + `'>"Linux"</span> {
 		fmt.Println(<span class='` + StyleBrackets + `'>"The GPL is a good thing"</span>)

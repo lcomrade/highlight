@@ -122,17 +122,34 @@ func Golang(code string) string {
 	}
 
 	cmdChars := []string{
-		"", " ", "\t", ":", ";", "(", ")",
+		"", " ", "\t", "\n", ":", ";", "(", ")",
 	}
 
 	// Operators
 	operators := []string{
-		"!", "!=", "%", "&",
-		"&&", "&^", "*", "+",
-		"-", "/", "<", "<-",
-		"<<", "<=", "==", ">",
-		">=", ">>", "^", "|",
+		"!", "!=", "%", "&amp",
+		"&amp&amp", "&amp^", "*", "+",
+		"-", "/", "&lt", "&lt-",
+		"&lt&lt", "&lt=", "==", "&gt",
+		"&gt=", "&gt&gt", "^", "|",
 		"||", "=", ":=",
+	}
+
+	opsChars := []string{
+		"", " ", "\t", ":", "(", ")",
+		`"`, `'`, "`", "_",
+		"1", "2", "3", "4", "5",
+		"6", "7", "8", "9", "0",
+		"a", "b", "c", "d", "e", "f",
+		"g", "h", "i", "j", "k", "l",
+		"m", "n", "o", "p", "q", "r",
+		"s", "t", "u", "v", "w", "x",
+		"y", "z",
+		"A", "B", "C", "D", "E", "F",
+		"G", "H", "I", "J", "K", "L",
+		"M", "N", "O", "P", "Q", "R",
+		"S", "T", "U", "V", "W", "X",
+		"Y", "Z",
 	}
 
 	// Varibles types
@@ -163,7 +180,7 @@ func Golang(code string) string {
 
 		// Operators
 		for _, word := range operators {
-			line = formatWord(line, word, cmdChars, cmdChars, StyleOperator)
+			line = formatWord(line, word, opsChars, opsChars, StyleOperator)
 		}
 
 		// Varibles types

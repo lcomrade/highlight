@@ -194,7 +194,8 @@ func Python(code string) string {
 	}
 
 	cmdChars := []string{
-		"", " ", "\t", ":", ";", "(", ")",
+		"", " ", "\t", "\n", ":", ";", "(", ")",
+		"=",
 	}
 
 	// Operators
@@ -232,7 +233,7 @@ func Python(code string) string {
 	}
 
 	varChars := []string{
-		"", " ", "\t", ":", "(", ")",
+		"", " ", "\t", "\n", ":", "(", ")",
 	}
 
 	// Build-in functions
