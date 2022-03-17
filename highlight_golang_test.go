@@ -46,6 +46,13 @@ import(
 	"fmt" // this is import
 )
 
+/*
+Multi-line comment:
+line 1
+line 2
+end
+*/
+
 func main() {
 	// comment
 	var answer string
@@ -69,6 +76,13 @@ func main() {
 <span class='` + StyleKeyword + `'>import</span>(
 	<span class='` + StyleBrackets + `'>"fmt"</span> <span class='` + StyleComment + `'>// this is import</span>
 )
+
+<span class='` + StyleComment + `'>/*
+Multi-line comment:
+line 1
+line 2
+end
+*/</span>
 
 <span class='` + StyleKeyword + `'>func</span> main() {
 	<span class='` + StyleComment + `'>// comment</span>

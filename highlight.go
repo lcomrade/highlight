@@ -30,10 +30,9 @@ import (
 //   <span style='code-k'>User-Agent:</span>
 //   <span style='code-c'># My comment</span>
 const (
-	StyleKeyword  = "code-k"
-	StyleOperator = "code-o"
-	StyleVarType  = "code-vt"
-	//	StyleArg         = "code-a"
+	StyleKeyword     = "code-k"
+	StyleOperator    = "code-o"
+	StyleVarType     = "code-vt"
 	StyleBuildInVar  = "code-bi-v"
 	StyleBuildInFunc = "code-bi-f"
 	StyleComment     = "code-c"
@@ -311,6 +310,7 @@ func formatCComment(line string) string {
 		result = result + char
 	}
 
+	// Close not closed <span> tags
 	if commentFound == true {
 		result = result + "</span>"
 	}
@@ -355,9 +355,74 @@ func formatSharpComment(line string) string {
 		result = result + char
 	}
 
+	// Close not closed <span> tags
 	if commentFound == true {
 		result = result + "</span>"
 	}
 
 	return result
+}
+
+// Processes multi-line comments ('/* comment */').
+// Returns the string and whether the tag is still open or not.
+func formatCMultiComment(line string, commentOpen bool) (string, bool) {
+	result := ""
+
+	lineRune := []rune(line)
+	lineLen := len(lineRune)
+
+	otherSpanTagOpen := 0
+	skip := 0
+
+	for i, charRune := range lineRune {
+		// Skip
+		if skip != 0 {
+			skip = skip - 1
+			continue
+		}
+
+		// Current char
+		char := string(charRune)
+
+		// Get next char
+		nextChar := ""
+
+		if lineLen > i+1 {
+			nextChar = string(lineRune[i+1])
+		}
+
+		// Find <span
+		if lineLen > i+5 {
+			if line[i:i+5] == "<span" {
+				otherSpanTagOpen = otherSpanTagOpen + 1
+			}
+		}
+
+		// Find </span>
+		if lineLen > i+7 {
+			if line[i:i+7] == "</span>" {
+				otherSpanTagOpen = otherSpanTagOpen - 1
+			}
+		}
+
+		// Parse comment open: /*
+		if commentOpen == false && char == "/" && nextChar == "*" && otherSpanTagOpen == 0 {
+			result = result + "<span class='" + StyleComment + "'>/*"
+			skip = 1
+			commentOpen = true
+			continue
+		}
+
+		// Parse comment close: */
+		if commentOpen == true && char == "*" && nextChar == "/" && otherSpanTagOpen == 0 {
+			result = result + "*/</span>"
+			skip = 1
+			commentOpen = false
+			continue
+		}
+
+		result = result + char
+	}
+
+	return result, commentOpen
 }
