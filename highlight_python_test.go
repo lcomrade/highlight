@@ -71,7 +71,7 @@ if __name__ == "__main__":
 <span class='` + StyleComment + `'>#!/usr/bin/python3</span>
 
 <span class='` + StyleKeyword + `'>def</span> main() -&gt <span class='code-k'>None</span>:
-	name = <span class='` + StyleBuildInFunc + `'>input</span>(<span class='` + StyleBrackets + `'>"Your name:"</span>)
+	name <span class='` + StyleOperator + `'>=</span> <span class='` + StyleBuildInFunc + `'>input</span>(<span class='` + StyleBrackets + `'>"Your name:"</span>)
 
 	<span class='` + StyleKeyword + `'>if</span> name <span class='` + StyleOperator + `'>==</span> <span class='` + StyleBrackets + `'>"Ivan"</span> <span class='` + StyleKeyword + `'>or</span> name <span class='` + StyleOperator + `'>==</span> <span class='` + StyleBrackets + `'>"Nikolai"</span>:
 		<span class='` + StyleBuildInFunc + `'>print</span>(<span class='` + StyleBrackets + `'>"Vodka, matryoshka, balalaika!"</span>)
