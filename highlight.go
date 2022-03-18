@@ -319,36 +319,42 @@ func formatCComment(line string) string {
 }
 
 // Processes '#' (sharp) comments.
-func formatSharpComment(line string) string {
+func formatSharpComment(text string) string {
 	result := ""
 
-	lineRune := []rune(line)
-	lineLen := len(lineRune)
+	textRune := []rune(text)
+	textLen := len(textRune)
 
 	otherSpanTagOpen := 0
-	commentFound := false
+	commentOpen := false
 
-	for i, charRune := range lineRune {
+	for i, charRune := range textRune {
 		char := string(charRune)
 
 		// Find <span
-		if lineLen > i+5 {
-			if line[i:i+5] == "<span" {
+		if textLen > i+5 {
+			if text[i:i+5] == "<span" {
 				otherSpanTagOpen = otherSpanTagOpen + 1
 			}
 		}
 
 		// Find </span>
-		if lineLen > i+7 {
-			if line[i:i+7] == "</span>" {
+		if textLen > i+7 {
+			if text[i:i+7] == "</span>" {
 				otherSpanTagOpen = otherSpanTagOpen - 1
 			}
 		}
 
 		// Parse
-		if commentFound == false && char == "#" && otherSpanTagOpen == 0 {
+		if commentOpen == false && char == "#" && otherSpanTagOpen == 0 {
 			result = result + "<span class='" + StyleComment + "'>#"
-			commentFound = true
+			commentOpen = true
+			continue
+		}
+
+		if commentOpen == true && char == "\n" {
+			result = result + "</span>\n"
+			commentOpen = false
 			continue
 		}
 
@@ -356,7 +362,7 @@ func formatSharpComment(line string) string {
 	}
 
 	// Close not closed <span> tags
-	if commentFound == true {
+	if commentOpen == true {
 		result = result + "</span>"
 	}
 

@@ -18,10 +18,6 @@
 
 package highlight
 
-import (
-	"strings"
-)
-
 // Python processes python source code (*.py files).
 // Read more: https://docs.python.org/3/reference/index.html
 //
@@ -169,13 +165,8 @@ import (
 //
 // Single-line comments (#) and brackets(", ') are also supported.
 func Python(code string) string {
-	var result string = ""
-
 	// Shild HTML
 	code = shieldHTML(code)
-
-	lines := strings.Split(code, "\n")
-	linesNum := len(lines)
 
 	// Keywords
 	keywords := []string{
@@ -268,43 +259,31 @@ func Python(code string) string {
 		"", " ", "\t", ":", ";", "(", ")",
 	}
 
-	// Run parser
-	for i := range lines {
-		line := lines[i]
+	// Comment
+	code = formatSharpComment(code)
 
-		// Comment
-		line = formatSharpComment(line)
+	// Brackets
+	code = formatBrackets(code)
 
-		// Brackets
-		line = formatBrackets(line)
-
-		// Keywords
-		for _, word := range keywords {
-			line = formatWord(line, word, cmdChars, cmdChars, StyleKeyword)
-		}
-
-		// Operators
-		for _, word := range operators {
-			line = formatWord(line, word, opsChars, opsChars, StyleOperator)
-		}
-
-		// Build-in vars
-		for _, word := range buildInVars {
-			line = formatWord(line, word, varChars, varChars, StyleBuildInVar)
-		}
-
-		// Build-in functions
-		for _, word := range buildInFuncs {
-			line = formatWord(line, word, funcChars, funcChars, StyleBuildInFunc)
-		}
-
-		// Save
-		if linesNum != i+1 {
-			result = result + line + "\n"
-		} else {
-			result = result + line
-		}
+	// Keywords
+	for _, word := range keywords {
+		code = formatWord(code, word, cmdChars, cmdChars, StyleKeyword)
 	}
 
-	return result
+	// Operators
+	for _, word := range operators {
+		code = formatWord(code, word, opsChars, opsChars, StyleOperator)
+	}
+
+	// Build-in vars
+	for _, word := range buildInVars {
+		code = formatWord(code, word, varChars, varChars, StyleBuildInVar)
+	}
+
+	// Build-in functions
+	for _, word := range buildInFuncs {
+		code = formatWord(code, word, funcChars, funcChars, StyleBuildInFunc)
+	}
+
+	return code
 }
