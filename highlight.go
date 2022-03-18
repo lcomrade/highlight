@@ -273,7 +273,7 @@ func formatCComment(line string) string {
 	lineLen := len(lineRune)
 
 	otherSpanTagOpen := 0
-	commentFound := false
+	commentOpen := false
 
 	for i, charRune := range lineRune {
 		// Current char
@@ -301,9 +301,15 @@ func formatCComment(line string) string {
 		}
 
 		// Parse
-		if commentFound == false && char == "/" && nextChar == "/" && otherSpanTagOpen == 0 {
+		if commentOpen == false && char == "/" && nextChar == "/" && otherSpanTagOpen == 0 {
 			result = result + "<span class='" + StyleComment + "'>/"
-			commentFound = true
+			commentOpen = true
+			continue
+		}
+
+		if commentOpen == true && char == "\n" {
+			result = result + "</span>\n"
+			commentOpen = false
 			continue
 		}
 
@@ -311,7 +317,7 @@ func formatCComment(line string) string {
 	}
 
 	// Close not closed <span> tags
-	if commentFound == true {
+	if commentOpen == true {
 		result = result + "</span>"
 	}
 
@@ -370,17 +376,17 @@ func formatSharpComment(text string) string {
 }
 
 // Processes multi-line comments ('/* comment */').
-// Returns the string and whether the tag is still open or not.
-func formatCMultiComment(line string, commentOpen bool) (string, bool) {
+func formatCMultiComment(text string) string {
 	result := ""
 
-	lineRune := []rune(line)
-	lineLen := len(lineRune)
+	textRune := []rune(text)
+	textLen := len(textRune)
 
+	commentOpen := false
 	otherSpanTagOpen := 0
 	skip := 0
 
-	for i, charRune := range lineRune {
+	for i, charRune := range textRune {
 		// Skip
 		if skip != 0 {
 			skip = skip - 1
@@ -393,20 +399,20 @@ func formatCMultiComment(line string, commentOpen bool) (string, bool) {
 		// Get next char
 		nextChar := ""
 
-		if lineLen > i+1 {
-			nextChar = string(lineRune[i+1])
+		if textLen > i+1 {
+			nextChar = string(textRune[i+1])
 		}
 
 		// Find <span
-		if lineLen > i+5 {
-			if line[i:i+5] == "<span" {
+		if textLen > i+5 {
+			if text[i:i+5] == "<span" {
 				otherSpanTagOpen = otherSpanTagOpen + 1
 			}
 		}
 
 		// Find </span>
-		if lineLen > i+7 {
-			if line[i:i+7] == "</span>" {
+		if textLen > i+7 {
+			if text[i:i+7] == "</span>" {
 				otherSpanTagOpen = otherSpanTagOpen - 1
 			}
 		}
@@ -430,5 +436,10 @@ func formatCMultiComment(line string, commentOpen bool) (string, bool) {
 		result = result + char
 	}
 
-	return result, commentOpen
+	if commentOpen == true {
+		result = result + "</span>"
+		commentOpen = false
+	}
+
+	return result
 }

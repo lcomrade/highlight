@@ -18,10 +18,6 @@
 
 package highlight
 
-import (
-	"strings"
-)
-
 // Golang processes go source code (*.go files).
 // Read more: https://go.dev/ref/spec
 //
@@ -101,13 +97,8 @@ import (
 // Single-line comments (//) and multi-line comments (/* */).
 // Brackets(", ') are also supported.
 func Golang(code string) string {
-	var result string = ""
-
 	// Shild HTML
 	code = shieldHTML(code)
-
-	lines := strings.Split(code, "\n")
-	linesNum := len(lines)
 
 	// Keywords
 	keywords := []string{
@@ -164,46 +155,29 @@ func Golang(code string) string {
 		"string",
 	}
 
-	// Run parser
-	commentOpen := false
+	// Multi-line comments
+	code = formatCMultiComment(code)
 
-	for i := range lines {
-		line := lines[i]
+	// Single-line comment
+	code = formatCComment(code)
 
-		// Multi-line comments
-		lastCommentOpen := commentOpen
-		line, commentOpen = formatCMultiComment(line, commentOpen)
+	// Brackets
+	code = formatBrackets(code)
 
-		if lastCommentOpen != true && commentOpen != true {
-			// Single-line comment
-			line = formatCComment(line)
-
-			// Brackets
-			line = formatBrackets(line)
-
-			// Keywords
-			for _, word := range keywords {
-				line = formatWord(line, word, cmdChars, cmdChars, StyleKeyword)
-			}
-
-			// Operators
-			for _, word := range operators {
-				line = formatWord(line, word, opsChars, opsChars, StyleOperator)
-			}
-
-			// Varibles types
-			for _, word := range varTypes {
-				line = formatWord(line, word, cmdChars, cmdChars, StyleVarType)
-			}
-		}
-
-		// Save
-		if linesNum != i+1 {
-			result = result + line + "\n"
-		} else {
-			result = result + line
-		}
+	// Keywords
+	for _, word := range keywords {
+		code = formatWord(code, word, cmdChars, cmdChars, StyleKeyword)
 	}
 
-	return result
+	// Operators
+	for _, word := range operators {
+		code = formatWord(code, word, opsChars, opsChars, StyleOperator)
+	}
+
+	// Varibles types
+	for _, word := range varTypes {
+		code = formatWord(code, word, cmdChars, cmdChars, StyleVarType)
+	}
+
+	return code
 }
