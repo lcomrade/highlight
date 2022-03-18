@@ -94,8 +94,11 @@ package highlight
 //   rune
 //   string
 //
-// Single-line comments (//) and multi-line comments (/* */).
-// Brackets(", ') are also supported.
+// Also supported:
+//   Single-line comments (//)
+//   Multi-line comments (/* */)
+//   Single-line brackets (", ')
+//   Multi-line brackets (` `)
 func Golang(code string) string {
 	// Shild HTML
 	code = shieldHTML(code)
@@ -156,13 +159,17 @@ func Golang(code string) string {
 	}
 
 	// Multi-line comments
-	code = formatCMultiComment(code)
+	code = formatOpenClose(code, "/*", "*/", StyleComment)
 
-	// Single-line comment
-	code = formatCComment(code)
+	// Multi-line brackets
+	code = formatOpenClose(code, "`", "`", StyleBrackets)
 
-	// Brackets
-	code = formatBrackets(code)
+	// Single-line comments
+	code = formatOpenClose(code, "//", "\n", StyleComment)
+
+	// Single-line brackets
+	code = formatOpenClose(code, `"`, `"`, StyleBrackets)
+	code = formatOpenClose(code, `'`, `'`, StyleBrackets)
 
 	// Keywords
 	for _, word := range keywords {

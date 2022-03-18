@@ -163,7 +163,11 @@ package highlight
 //   zip()
 //   __import__()
 //
-// Single-line comments (#) and brackets(", ') are also supported.
+// Also supported:
+//   Single-line comments (#)
+//   Multi-line comments (''' ''')
+//   Single-line brackets (", ')
+//   Multi-line brackets (""" """)
 func Python(code string) string {
 	// Shild HTML
 	code = shieldHTML(code)
@@ -259,10 +263,16 @@ func Python(code string) string {
 		"", " ", "\t", ":", ";", "(", ")",
 	}
 
-	// Comment
+	// Multi-line comments
+	code = formatOpenClose(code, `'''`, `'''`, StyleComment)
+
+	// Multi-line brackets
+	code = formatOpenClose(code, `"""`, `"""`, StyleBrackets)
+
+	// Sinle-line comments
 	code = formatOpenClose(code, "#", "\n", StyleComment)
 
-	// Brackets
+	// Single-line brackets
 	code = formatOpenClose(code, `"`, `"`, StyleBrackets)
 	code = formatOpenClose(code, `'`, `'`, StyleBrackets)
 

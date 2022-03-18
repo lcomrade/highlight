@@ -18,10 +18,6 @@
 
 package highlight
 
-import (
-	"strings"
-)
-
 // Dockerfile processes Docker builder files.
 // Read more: https://docs.docker.com/engine/reference/builder/
 //
@@ -47,13 +43,8 @@ import (
 //
 // Comments (#) are also supported.
 func Dockerfile(code string) string {
-	var result string = ""
-
 	// Shild HTML
 	code = shieldHTML(code)
-
-	lines := strings.Split(code, "\n")
-	linesNum := len(lines)
 
 	// Commands list
 	commands := []string{
@@ -65,26 +56,17 @@ func Dockerfile(code string) string {
 		"STOPSIGNAL", "HEALTHCHECK", "SHELL",
 	}
 
-	for i := range lines {
-		line := lines[i]
-		// Comment
-		line = formatSharpComment(line)
+	// Sinle-line comments
+	code = formatOpenClose(code, "#", "\n", StyleComment)
 
-		// Brackets
-		line = formatBrackets(line)
+	// Single-line brackets
+	code = formatOpenClose(code, `"`, `"`, StyleBrackets)
+	code = formatOpenClose(code, `'`, `'`, StyleBrackets)
 
-		// Commands
-		for _, cmd := range commands {
-			line = formatWord(line, cmd, []string{"", " ", "\t"}, []string{"", " ", "\t"}, StyleKeyword)
-		}
-
-		// Save
-		if linesNum != i+1 {
-			result = result + line + "\n"
-		} else {
-			result = result + line
-		}
+	// Commands
+	for _, cmd := range commands {
+		code = formatWord(code, cmd, []string{"", " ", "\t", "\n"}, []string{"", " ", "\t", "\n"}, StyleKeyword)
 	}
 
-	return result
+	return code
 }

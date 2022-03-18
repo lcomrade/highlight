@@ -42,14 +42,15 @@ func RobotsTxt(code string) string {
 	// Shild HTML
 	code = shieldHTML(code)
 
+	// Sinle-line comments
+	code = formatOpenClose(code, "#", "\n", StyleComment)
+
+	// Directives
 	lines := strings.Split(code, "\n")
 	linesNum := len(lines)
 
 	for i := range lines {
 		line := lines[i]
-
-		// Comment
-		line = formatSharpComment(line)
 
 		// Standard
 		line = replacePrefix(line, "User-agent:", "<span class='"+StyleKeyword+"'>User-agent:</span>")
