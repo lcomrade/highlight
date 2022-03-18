@@ -260,10 +260,11 @@ func Python(code string) string {
 	}
 
 	// Comment
-	code = formatSharpComment(code)
+	code = formatOpenClose(code, "#", "\n", StyleComment)
 
 	// Brackets
-	code = formatBrackets(code)
+	code = formatOpenClose(code, `"`, `"`, StyleBrackets)
+	code = formatOpenClose(code, `'`, `'`, StyleBrackets)
 
 	// Keywords
 	for _, word := range keywords {

@@ -197,6 +197,92 @@ func formatWord(line string, command string, cmdStartChars []string, cmdEndChars
 	return result
 }
 
+// Processes structures that have an opening and closing tag.
+// Content inside <span>....</span> is ignored.
+// It is assumed that all HTML tags except <span>....</span> were shielded.
+func formatOpenClose(text string, openStr string, closeStr string, styleClass string) string {
+	result := ""
+
+	textRune := []rune(text)
+	textLen := len(textRune)
+	openLen := len(openStr)
+	closeLen := len(closeStr)
+
+	spanTagOpen := false
+	otherSpanTagOpen := 0
+	skip := 0
+
+	for i := range textRune {
+		char := string(textRune[i])
+
+		// Skip
+		if skip != 0 {
+			skip = skip - 1
+			continue
+		}
+
+		// Get open sub string
+		openSub := ""
+
+		if textLen > i+openLen-1 {
+			openSub = text[i : i+openLen]
+		}
+
+		// Get close sub string
+		closeSub := ""
+
+		if textLen > i+closeLen-1 {
+			closeSub = text[i : i+closeLen]
+		}
+
+		// Find <span
+		if textLen > i+5 {
+			if text[i:i+5] == "<span" {
+				otherSpanTagOpen = otherSpanTagOpen + 1
+			}
+		}
+
+		// Find </span>
+		if textLen > i+7 {
+			if text[i:i+7] == "</span>" {
+				otherSpanTagOpen = otherSpanTagOpen - 1
+			}
+		}
+
+		// Check open str
+		if openSub == openStr && spanTagOpen == false && otherSpanTagOpen == 0 {
+			result = result + "<span class='" + styleClass + "'>" + openSub
+			spanTagOpen = true
+			skip = openLen - 1
+			continue
+		}
+
+		// Check close str
+		if closeSub == closeStr && spanTagOpen == true && otherSpanTagOpen == 0 {
+			if closeStr == "\n" {
+				result = result + "</span>\n"
+
+			} else {
+				result = result + closeSub + "</span>"
+			}
+
+			spanTagOpen = false
+			skip = closeLen - 1
+			continue
+		}
+
+		// Else
+		result = result + char
+	}
+
+	if spanTagOpen == true {
+		result = result + "</span>"
+		spanTagOpen = false
+	}
+
+	return result
+}
+
 // Processes `"` and `'` brackets.
 func formatBrackets(text string) string {
 	result := ""
