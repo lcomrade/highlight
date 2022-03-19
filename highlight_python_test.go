@@ -51,6 +51,9 @@ test
 		{
 			Input: `
 #!/usr/bin/python3
+"""
+This is test.
+"""
 
 def main() -> None:
 	name = input("Your name:")
@@ -64,11 +67,23 @@ def main() -> None:
 	else:
 		print("I don't know what to say about that name:(")
 
+'''
+My multi-line comment:
+   line 1
+   line 2
+   line 3
+
+End
+'''
+
 if __name__ == "__main__":
 	main()
 `,
 			ExpectResult: `
 <span class='` + StyleComment + `'>#!/usr/bin/python3</span>
+<span class='` + StyleBrackets + `'>"""
+This is test.
+"""</span>
 
 <span class='` + StyleKeyword + `'>def</span> main() -&gt <span class='code-k'>None</span>:
 	name <span class='` + StyleOperator + `'>=</span> <span class='` + StyleBuildInFunc + `'>input</span>(<span class='` + StyleBrackets + `'>"Your name:"</span>)
@@ -81,6 +96,15 @@ if __name__ == "__main__":
 
 	<span class='` + StyleKeyword + `'>else</span>:
 		<span class='` + StyleBuildInFunc + `'>print</span>(<span class='` + StyleBrackets + `'>"I don't know what to say about that name:("</span>)
+
+<span class='` + StyleComment + `'>'''
+My multi-line comment:
+   line 1
+   line 2
+   line 3
+
+End
+'''</span>
 
 <span class='` + StyleKeyword + `'>if</span> <span class='` + StyleBuildInVar + `'>__name__</span> <span class='` + StyleOperator + `'>==</span> <span class='` + StyleBrackets + `'>"__main__"</span>:
 	main()
