@@ -7,6 +7,11 @@
 programming and markup languages inside HTML documents.
 
 ## Install
+Supported Go versions:
+- 1.9
+- 1.11
+- 1.17
+
 Download from GitHub:
 ```
 go get github.com/lcomrade/highlight
@@ -23,6 +28,8 @@ The `<span>` tag is used to highlight syntax when converting to HTML.
 This tag does not do anything on its own,
 but you can assign different properties to it in CSS.
 Including color and font.
+
+All extraneous HTML tags will be protected.
 
 Before highlighting:
 ```robots.txt
@@ -51,6 +58,44 @@ After highlighting:
 <span class='code-keyword'>Sitemap:</span> https://example.org/sitemap.xml
 <span class='code-keyword'>Host:</span> https://mirror.example.org
 ```
+
+
+## Supported languages
+- C
+- Dockerfile
+- Golang
+- Python
+- `robots.txt`
+
+
+## Code example
+```golang
+package main
+
+import (
+	"fmt"
+	"github.com/lcomrade/highlight"
+)
+
+func main() {
+	// Code written in the C language
+	myCode := `
+#include <stdio.h>
+
+// Comment
+
+int main() {
+	printf("Hello, world!");
+
+	return 0;
+}
+`
+
+	// Highlight
+	fmt.Println(highlight.C(myCode))
+}
+```
+*[Read more in the documentation](https://pkg.go.dev/github.com/lcomrade/highlight#section-documentation)*
 
 
 ## Documentation
