@@ -1,6 +1,9 @@
 # Changelog
 Semantic versioning is used (https://semver.org/).
 
+## v1.0.1
+- Fix: UTF-8 support
+
 ## v1.0.0
 - Added support for С
 - Added support for Dockerfile

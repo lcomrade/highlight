@@ -56,6 +56,16 @@ FROMalpine
 		},
 		{
 			Input: `
+# Комментарий.
+# Ещё один комментарий.
+`,
+			ExpectResult: `
+<span class='` + StyleComment + `'># Комментарий.</span>
+<span class='` + StyleComment + `'># Ещё один комментарий.</span>
+`,
+		},
+		{
+			Input: `
 FROM python:3-alpine
 
 # comment 1

@@ -46,14 +46,14 @@ func formatOpenClose(text string, openStr string, closeStr string, styleClass st
 		openSub := ""
 
 		if textLen > i+openLen-1 {
-			openSub = text[i : i+openLen]
+			openSub = string(textRune[i : i+openLen])
 		}
 
 		// Get close sub string
 		closeSub := ""
 
 		if textLen > i+closeLen-1 {
-			closeSub = text[i : i+closeLen]
+			closeSub = string(textRune[i : i+closeLen])
 		}
 
 		// Find <span

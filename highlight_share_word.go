@@ -80,7 +80,7 @@ func formatWord(line string, command string, cmdStartChars []string, cmdEndChars
 		subLine := ""
 
 		if lineLen > i+commandLen-1 {
-			subLine = line[i : i+commandLen]
+			subLine = string(lineRune[i : i+commandLen])
 		}
 
 		// Find <span
