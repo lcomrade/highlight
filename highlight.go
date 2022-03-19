@@ -45,6 +45,7 @@ const (
 //
 //   | Function name | Language name   |
 //   |---------------|-----------------|
+//   | C             | c               |
 //   | Dockerfile    | dockerfile      |
 //   | Golang        | go, golang      |
 //   | Python        | python, python3 |
@@ -53,6 +54,9 @@ func ByName(code string, language string) (string, error) {
 	language = strings.ToLower(language)
 
 	switch strings.ToLower(language) {
+	case "c":
+		return C(code), nil
+
 	case "dockerfile":
 		return Dockerfile(code), nil
 
