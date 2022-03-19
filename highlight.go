@@ -70,5 +70,5 @@ func ByName(code string, language string) (string, error) {
 		return RobotsTxt(code), nil
 	}
 
-	return "", errors.New("highlight: unknown language name: " + language)
+	return code, errors.New("highlight: unknown language name: " + language)
 }
