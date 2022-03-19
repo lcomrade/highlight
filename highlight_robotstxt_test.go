@@ -51,7 +51,7 @@ test
 # Allow:
 `,
 			ExpectResult: `
-<span class='code-c'># Allow:</span>
+<span class='` + StyleComment + `'># Allow:</span>
 `,
 		},
 		{

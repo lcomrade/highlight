@@ -51,7 +51,7 @@ FROMalpine
 # RUN rf -rf /
 `,
 			ExpectResult: `
-<span class='code-c'># RUN rf -rf /</span>
+<span class='` + StyleComment + `'># RUN rf -rf /</span>
 `,
 		},
 		{

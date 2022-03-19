@@ -27,16 +27,16 @@ import (
 // that will be assigned to the HTML tag '<span>'.
 //
 // Examples:
-//   <span style='code-k'>User-Agent:</span>
-//   <span style='code-c'># My comment</span>
+//   <span style='code-keyword'>User-Agent:</span>
+//   <span style='code-comment'># My comment</span>
 const (
-	StyleKeyword     = "code-k"
-	StyleOperator    = "code-o"
-	StyleVarType     = "code-vt"
-	StyleBuildInVar  = "code-bi-v"
-	StyleBuildInFunc = "code-bi-f"
-	StyleComment     = "code-c"
-	StyleBrackets    = "code-b"
+	StyleKeyword     = "code-keyword"
+	StyleOperator    = "code-operator"
+	StyleVarType     = "code-var-type"
+	StyleBuildInVar  = "code-build-in-var"
+	StyleBuildInFunc = "code-build-in-func"
+	StyleComment     = "code-comment"
+	StyleBrackets    = "code-brackets"
 )
 
 // ByName helps to highlight code based on the language name.

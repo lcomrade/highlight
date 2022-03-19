@@ -40,16 +40,16 @@ Host: https://mirror.example.org
 
 After highlighting:
 ```html
-<span class='code-k'>User-agent:</span> * <span class='code-c'># comment</span>
-<span class='code-k'>Disallow:</span> /faq
+<span class='code-keyword'>User-agent:</span> * <span class='code-c'># comment</span>
+<span class='code-keyword'>Disallow:</span> /faq
 
-<span class='code-c'># comment 1</span>
-<span class='code-c'># comment 2</span>
+<span class='code-comment'># comment 1</span>
+<span class='code-comment'># comment 2</span>
 
-<span class='code-k'>Allow:</span> /
-<span class='code-k'>Crawl-delay:</span> 10
-<span class='code-k'>Sitemap:</span> https://example.org/sitemap.xml
-<span class='code-k'>Host:</span> https://mirror.example.org
+<span class='code-keyword'>Allow:</span> /
+<span class='code-keyword'>Crawl-delay:</span> 10
+<span class='code-keyword'>Sitemap:</span> https://example.org/sitemap.xml
+<span class='code-keyword'>Host:</span> https://mirror.example.org
 ```
 
 
