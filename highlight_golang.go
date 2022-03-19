@@ -116,10 +116,6 @@ func Golang(code string) string {
 		"var",
 	}
 
-	cmdChars := []string{
-		"", " ", "\t", "\n", ":", ";", "(", ")",
-	}
-
 	// Operators
 	operators := []string{
 		"!", "!=", "%", "&amp",
@@ -128,23 +124,6 @@ func Golang(code string) string {
 		"&lt&lt", "&lt=", "==", "&gt",
 		"&gt=", "&gt&gt", "^", "|",
 		"||", "=", ":=",
-	}
-
-	opsChars := []string{
-		"", " ", "\t", ":", "(", ")",
-		`"`, `'`, "`", "_",
-		"1", "2", "3", "4", "5",
-		"6", "7", "8", "9", "0",
-		"a", "b", "c", "d", "e", "f",
-		"g", "h", "i", "j", "k", "l",
-		"m", "n", "o", "p", "q", "r",
-		"s", "t", "u", "v", "w", "x",
-		"y", "z",
-		"A", "B", "C", "D", "E", "F",
-		"G", "H", "I", "J", "K", "L",
-		"M", "N", "O", "P", "Q", "R",
-		"S", "T", "U", "V", "W", "X",
-		"Y", "Z",
 	}
 
 	// Varibles types
@@ -173,17 +152,17 @@ func Golang(code string) string {
 
 	// Keywords
 	for _, word := range keywords {
-		code = formatWord(code, word, cmdChars, cmdChars, StyleKeyword)
+		code = formatWord(code, word, defaultKeywordChars, defaultKeywordChars, StyleKeyword)
 	}
 
 	// Operators
 	for _, word := range operators {
-		code = formatWord(code, word, opsChars, opsChars, StyleOperator)
+		code = formatWord(code, word, defaultOperatorChars, defaultOperatorChars, StyleOperator)
 	}
 
 	// Varibles types
 	for _, word := range varTypes {
-		code = formatWord(code, word, cmdChars, cmdChars, StyleVarType)
+		code = formatWord(code, word, defaultKeywordChars, defaultKeywordChars, StyleVarType)
 	}
 
 	return code

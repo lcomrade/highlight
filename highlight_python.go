@@ -188,11 +188,6 @@ func Python(code string) string {
 		"with", "yield",
 	}
 
-	cmdChars := []string{
-		"", " ", "\t", "\n", ":", ";", "(", ")",
-		"=",
-	}
-
 	// Operators
 	operators := []string{
 		"+", "-", "*", "**",
@@ -202,33 +197,12 @@ func Python(code string) string {
 		"&lt=", "&gt=", "==", "!=",
 	}
 
-	opsChars := []string{
-		"", " ", "\t", ":", "(", ")",
-		`"`, `'`, "`", "_",
-		"1", "2", "3", "4", "5",
-		"6", "7", "8", "9", "0",
-		"a", "b", "c", "d", "e", "f",
-		"g", "h", "i", "j", "k", "l",
-		"m", "n", "o", "p", "q", "r",
-		"s", "t", "u", "v", "w", "x",
-		"y", "z",
-		"A", "B", "C", "D", "E", "F",
-		"G", "H", "I", "J", "K", "L",
-		"M", "N", "O", "P", "Q", "R",
-		"S", "T", "U", "V", "W", "X",
-		"Y", "Z",
-	}
-
 	// Build-in vars
 	buildInVars := []string{
 		"__name__", "__loader__",
 		"__package__", "__spec__",
 		"__path__", "__file__",
 		"__cached__",
-	}
-
-	varChars := []string{
-		"", " ", "\t", "\n", ":", "(", ")",
 	}
 
 	// Build-in functions
@@ -259,10 +233,6 @@ func Python(code string) string {
 		"zip", "__import__",
 	}
 
-	funcChars := []string{
-		"", " ", "\t", ":", ";", "(", ")",
-	}
-
 	// Multi-line comments
 	code = formatOpenClose(code, `'''`, `'''`, StyleComment)
 
@@ -278,22 +248,22 @@ func Python(code string) string {
 
 	// Keywords
 	for _, word := range keywords {
-		code = formatWord(code, word, cmdChars, cmdChars, StyleKeyword)
+		code = formatWord(code, word, defaultKeywordChars, defaultKeywordChars, StyleKeyword)
 	}
 
 	// Operators
 	for _, word := range operators {
-		code = formatWord(code, word, opsChars, opsChars, StyleOperator)
+		code = formatWord(code, word, defaultOperatorChars, defaultOperatorChars, StyleOperator)
 	}
 
 	// Build-in vars
 	for _, word := range buildInVars {
-		code = formatWord(code, word, varChars, varChars, StyleBuildInVar)
+		code = formatWord(code, word, defaultKeywordChars, defaultKeywordChars, StyleBuildInVar)
 	}
 
 	// Build-in functions
 	for _, word := range buildInFuncs {
-		code = formatWord(code, word, funcChars, funcChars, StyleBuildInFunc)
+		code = formatWord(code, word, defaultKeywordChars, defaultKeywordChars, StyleBuildInFunc)
 	}
 
 	return code

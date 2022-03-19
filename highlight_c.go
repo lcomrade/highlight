@@ -19,7 +19,6 @@
 package highlight
 
 // C processes C source code (*.c files).
-// Read more: https://go.dev/ref/spec
 //
 // Supported keywords (const StyleKeyword):
 //   auto
@@ -132,11 +131,6 @@ func C(code string) string {
 		"_Static_assert", "_Thread_local",
 	}
 
-	cmdChars := []string{
-		"", " ", "\t", "\n", ":", ";",
-		"(", ")", "{", "}",
-	}
-
 	// Operators
 	operators := []string{
 		"-&ampgt", "==", "!=",
@@ -151,23 +145,6 @@ func C(code string) string {
 		"/", "%",
 	}
 
-	opsChars := []string{
-		"", " ", "\t", ":", "(", ")",
-		`"`, `'`, "{", "}", "_",
-		"1", "2", "3", "4", "5",
-		"6", "7", "8", "9", "0",
-		"a", "b", "c", "d", "e", "f",
-		"g", "h", "i", "j", "k", "l",
-		"m", "n", "o", "p", "q", "r",
-		"s", "t", "u", "v", "w", "x",
-		"y", "z",
-		"A", "B", "C", "D", "E", "F",
-		"G", "H", "I", "J", "K", "L",
-		"M", "N", "O", "P", "Q", "R",
-		"S", "T", "U", "V", "W", "X",
-		"Y", "Z",
-	}
-
 	// Multi-line comments
 	code = formatOpenClose(code, "/*", "*/", StyleComment)
 
@@ -180,12 +157,12 @@ func C(code string) string {
 
 	// Keywords
 	for _, word := range keywords {
-		code = formatWord(code, word, cmdChars, cmdChars, StyleKeyword)
+		code = formatWord(code, word, defaultKeywordChars, defaultKeywordChars, StyleKeyword)
 	}
 
 	// Operators
 	for _, word := range operators {
-		code = formatWord(code, word, opsChars, opsChars, StyleOperator)
+		code = formatWord(code, word, defaultOperatorChars, defaultOperatorChars, StyleOperator)
 	}
 
 	return code
