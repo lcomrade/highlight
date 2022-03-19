@@ -12,14 +12,9 @@ Supported Go versions:
 - 1.11
 - 1.17
 
-Download from GitHub:
-```
-go get github.com/lcomrade/highlight
-```
-
-Or you can use a mirror:
-```
-go get git.lcomrade.su/root/highlight
+Add to `go.mod` file:
+```go.mod
+require github.com/lcomrade/highlight v1.0.1
 ```
 
 
