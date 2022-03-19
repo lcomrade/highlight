@@ -85,14 +85,14 @@ func formatWord(line string, command string, cmdStartChars []string, cmdEndChars
 
 		// Find <span
 		if lineLen > i+5 {
-			if line[i:i+5] == "<span" {
+			if string(lineRune[i:i+5]) == "<span" {
 				otherSpanTagOpen = otherSpanTagOpen + 1
 			}
 		}
 
 		// Find </span>
 		if lineLen > i+7 {
-			if line[i:i+7] == "</span>" {
+			if string(lineRune[i:i+7]) == "</span>" {
 				otherSpanTagOpen = otherSpanTagOpen - 1
 			}
 		}

@@ -58,14 +58,14 @@ func formatOpenClose(text string, openStr string, closeStr string, styleClass st
 
 		// Find <span
 		if textLen > i+5 {
-			if text[i:i+5] == "<span" {
+			if string(textRune[i:i+5]) == "<span" {
 				otherSpanTagOpen = otherSpanTagOpen + 1
 			}
 		}
 
 		// Find </span>
 		if textLen > i+7 {
-			if text[i:i+7] == "</span>" {
+			if string(textRune[i:i+7]) == "</span>" {
 				otherSpanTagOpen = otherSpanTagOpen - 1
 			}
 		}

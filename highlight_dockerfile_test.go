@@ -58,10 +58,14 @@ FROMalpine
 			Input: `
 # Комментарий.
 # Ещё один комментарий.
+
+CMD [ "python", "./main.py" ]
 `,
 			ExpectResult: `
 <span class='` + StyleComment + `'># Комментарий.</span>
 <span class='` + StyleComment + `'># Ещё один комментарий.</span>
+
+<span class='` + StyleKeyword + `'>CMD</span> [ <span class='` + StyleBrackets + `'>"python"</span>, <span class='` + StyleBrackets + `'>"./main.py"</span> ]
 `,
 		},
 		{
