@@ -14,7 +14,7 @@ Supported Go versions:
 
 Add to `go.mod` file:
 ```go.mod
-require github.com/lcomrade/highlight v1.0.1
+require github.com/lcomrade/highlight v1.0.2
 ```
 
 
@@ -59,6 +59,7 @@ After highlighting:
 - C
 - Dockerfile
 - Golang
+- `go.mod`
 - Python
 - `robots.txt`
 

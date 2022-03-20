@@ -48,6 +48,7 @@ const (
 //   | C             | c               |
 //   | Dockerfile    | dockerfile      |
 //   | Golang        | go, golang      |
+//   | GoMod         | go.mod          |
 //   | Python        | python, python3 |
 //   | RobotsTxt     | robots.txt      |
 func ByName(code string, language string) (string, error) {
@@ -62,6 +63,9 @@ func ByName(code string, language string) (string, error) {
 
 	case "go", "golang":
 		return Golang(code), nil
+
+	case "go.mod":
+		return GoMod(code), nil
 
 	case "python", "python3":
 		return Python(code), nil
