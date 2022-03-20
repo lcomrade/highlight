@@ -35,7 +35,7 @@ int main() {
 }
 `,
 			ExpectResult: `
-#include &ltstdio.h&gt
+<span class='` + StyleKeyword + `'>#include</span> &ltstdio.h&gt
 
 <span class='` + StyleKeyword + `'>int</span> main() {
 	printf(<span class='` + StyleBrackets + `'>"Hello, world!"</span>);

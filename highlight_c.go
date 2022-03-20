@@ -20,6 +20,22 @@ package highlight
 
 // C processes C source code (*.c files).
 //
+// Supported preprocessor directives (const StyleKeyword):
+//   #define
+//   #elif
+//   #else
+//   #endif
+//   #error
+//   #if
+//   #ifdef
+//   #ifndef
+//   #import
+//   #include
+//   #line
+//   #pragma
+//   #undef
+//   #using
+//
 // Supported keywords (const StyleKeyword):
 //   auto
 //   break
@@ -110,6 +126,18 @@ func C(code string) string {
 	// Shild HTML
 	code = shieldHTML(code)
 
+	preprocessor := []string{
+		"#define", "#elif", "#else",
+		"#endif", "#error", "#if",
+		"#ifdef", "#ifndef", "#import",
+		"#include", "#line", "#pragma",
+		"#undef", "#using",
+	}
+
+	preprocessorChars := []string{
+		" ", "\t", "\n",
+	}
+
 	// Keywords
 	keywords := []string{
 		"auto", "break", "case",
@@ -154,6 +182,11 @@ func C(code string) string {
 	// Single-line brackets
 	code = formatOpenClose(code, `"`, `"`, StyleBrackets)
 	code = formatOpenClose(code, `'`, `'`, StyleBrackets)
+
+	// Preprocessor
+	for _, word := range preprocessor {
+		code = formatWord(code, word, preprocessorChars, preprocessorChars, StyleKeyword)
+	}
 
 	// Keywords
 	for _, word := range keywords {
