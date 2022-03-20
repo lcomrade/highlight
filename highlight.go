@@ -51,6 +51,7 @@ const (
 //   | GoMod         | go.mod          |
 //   | Python        | python, python3 |
 //   | RobotsTxt     | robots.txt      |
+//   | SQL           | sql             |
 func ByName(code string, language string) (string, error) {
 	language = strings.ToLower(language)
 
@@ -72,6 +73,9 @@ func ByName(code string, language string) (string, error) {
 
 	case "robots.txt":
 		return RobotsTxt(code), nil
+
+	case "sql":
+		return SQL(code), nil
 	}
 
 	return code, errors.New("highlight: unknown language name: " + language)

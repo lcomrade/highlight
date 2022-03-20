@@ -62,6 +62,7 @@ After highlighting:
 - `go.mod`
 - Python
 - `robots.txt`
+- SQL
 
 
 ## Code example
