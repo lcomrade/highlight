@@ -1,6 +1,12 @@
 # Changelog
 Semantic versioning is used (https://semver.org/).
 
+## v1.0.2
+- Add SQL support
+- Add `go.mod` support
+- Add C preprocessor directives support
+- Fix: UTF-8 support (part 2)
+
 ## v1.0.1
 - Fix: UTF-8 support
 
