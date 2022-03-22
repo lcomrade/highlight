@@ -89,5 +89,8 @@ func SQL(code string) string {
 		code = formatWord(code, word, goodChars, goodChars, StyleKeyword)
 	}
 
+	// Numbers
+	code = formatNumber(code, defaultNumberChars, defaultNumberChars)
+
 	return code
 }

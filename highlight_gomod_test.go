@@ -42,16 +42,16 @@ exclude example.com/thismodule v1.3.0
 			ExpectResult: `
 <span class='` + StyleKeyword + `'>module</span> example.com/mymodule
 
-<span class='` + StyleKeyword + `'>go</span> 1.14
+<span class='` + StyleKeyword + `'>go</span> <span class='` + StyleNumber + `'>1</span>.<span class='` + StyleNumber + `'>14</span>
 
 <span class='` + StyleKeyword + `'>require</span> (
-    example.com/othermodule v1.2.3
-    example.com/thismodule v1.2.3
-    example.com/thatmodule v1.2.3
+    example.com/othermodule v<span class='` + StyleNumber + `'>1</span>.<span class='` + StyleNumber + `'>2</span>.<span class='` + StyleNumber + `'>3</span>
+    example.com/thismodule v<span class='` + StyleNumber + `'>1</span>.<span class='` + StyleNumber + `'>2</span>.<span class='` + StyleNumber + `'>3</span>
+    example.com/thatmodule v<span class='` + StyleNumber + `'>1</span>.<span class='` + StyleNumber + `'>2</span>.<span class='` + StyleNumber + `'>3</span>
 )
 
 <span class='` + StyleKeyword + `'>replace</span> example.com/thatmodule <span class='` + StyleOperator + `'>=&gt</span> ../thatmodule
-<span class='` + StyleKeyword + `'>exclude</span> example.com/thismodule v1.3.0
+<span class='` + StyleKeyword + `'>exclude</span> example.com/thismodule v<span class='` + StyleNumber + `'>1</span>.<span class='` + StyleNumber + `'>3</span>.<span class='` + StyleNumber + `'>0</span>
 `,
 		},
 	}

@@ -266,5 +266,8 @@ func Python(code string) string {
 		code = formatWord(code, word, defaultKeywordChars, defaultKeywordChars, StyleBuildInFunc)
 	}
 
+	// Numbers
+	code = formatNumber(code, defaultNumberChars, defaultNumberChars)
+
 	return code
 }

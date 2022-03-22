@@ -198,5 +198,8 @@ func C(code string) string {
 		code = formatWord(code, word, defaultOperatorChars, defaultOperatorChars, StyleOperator)
 	}
 
+	// Numbers
+	code = formatNumber(code, defaultNumberChars, defaultNumberChars)
+
 	return code
 }

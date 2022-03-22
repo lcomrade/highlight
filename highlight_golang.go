@@ -165,5 +165,8 @@ func Golang(code string) string {
 		code = formatWord(code, word, defaultKeywordChars, defaultKeywordChars, StyleVarType)
 	}
 
+	// Numbers
+	code = formatNumber(code, defaultNumberChars, defaultNumberChars)
+
 	return code
 }

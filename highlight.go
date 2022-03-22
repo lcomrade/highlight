@@ -37,6 +37,7 @@ const (
 	StyleBuildInFunc = "code-build-in-func"
 	StyleComment     = "code-comment"
 	StyleBrackets    = "code-brackets"
+	StyleNumber      = "code-number"
 )
 
 // ByName helps to highlight code based on the language name.

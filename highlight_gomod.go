@@ -70,5 +70,8 @@ func GoMod(code string) string {
 		code = formatWord(code, word, []string{" "}, []string{" "}, StyleOperator)
 	}
 
+	// Numbers
+	code = formatNumber(code, []string{"", " ", "\t", "\n", "v", "."}, []string{"", " ", "\t", "\n", "."})
+
 	return code
 }
