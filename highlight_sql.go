@@ -55,7 +55,7 @@ package highlight
 //   WHERE
 //   WORK
 //
-// Brackets (", ') are also supported.
+// Brackets (", ') and numbers (100, 1.2, 1.25) are also supported.
 func SQL(code string) string {
 	// Shild HTML
 	code = shieldHTML(code)

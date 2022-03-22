@@ -14,7 +14,7 @@ Supported Go versions:
 
 Add to `go.mod` file:
 ```go.mod
-require github.com/lcomrade/highlight v1.0.2
+require github.com/lcomrade/highlight v1
 ```
 
 

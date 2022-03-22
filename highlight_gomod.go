@@ -32,7 +32,7 @@ package highlight
 // Supported operators (const StyleOperator):
 //   =>
 //
-// Single-line comments (//) are also supported.
+// Single-line comments (//) and numbers (100, 1.2, 1.25) are also supported.
 func GoMod(code string) string {
 	// Shild HTML
 	code = shieldHTML(code)

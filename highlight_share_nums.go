@@ -57,6 +57,8 @@ func formatNumber(text string, cmdStartChars []string, cmdEndChars []string) str
 
 		// Check
 		if otherSpanTagOpen == 0 {
+			ignoreNow := false
+
 			// Close buffer
 			if bufferOpen == true && isNumber(charRune) == false {
 				// Good close
@@ -68,22 +70,18 @@ func formatNumber(text string, cmdStartChars []string, cmdEndChars []string) str
 					result = result + buffer
 				}
 
-				// Save
-				result = result + char
 				buffer = ""
 				bufferOpen = false
-				continue
 			}
 
 			// Open buffer
 			if bufferOpen == false && isInStrList(cmdStartChars, char) {
-				result = result + char
 				bufferOpen = true
-				continue
+				ignoreNow = true
 			}
 
 			// Continue read
-			if bufferOpen == true {
+			if bufferOpen == true && ignoreNow == false {
 				buffer = buffer + char
 
 			} else {

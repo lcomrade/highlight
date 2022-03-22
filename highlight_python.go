@@ -168,6 +168,7 @@ package highlight
 //   Multi-line comments (''' ''')
 //   Single-line brackets (", ')
 //   Multi-line brackets (""" """)
+//   Numbers (100, 1.2, 1.25)
 func Python(code string) string {
 	// Shild HTML
 	code = shieldHTML(code)

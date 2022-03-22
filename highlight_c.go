@@ -122,6 +122,7 @@ package highlight
 //   Single-line comments (//)
 //   Multi-line comments (/* */)
 //   Single-line brackets (", ')
+//   Numbers (100, 1.2, 1.25)
 func C(code string) string {
 	// Shild HTML
 	code = shieldHTML(code)
