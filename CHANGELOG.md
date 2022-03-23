@@ -1,6 +1,13 @@
 # Changelog
 Semantic versioning is used (https://semver.org/).
 
+## v1.0.3
+- Add number highlight
+- Now true, false, nil and numbers are marked as `StyleValue`
+- Add Golang build-in functions highlight support
+- Update unit tests
+- Fix: UTF-8 support
+
 ## v1.0.2
 - Add SQL support
 - Add `go.mod` support
