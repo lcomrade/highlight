@@ -20,7 +20,8 @@ package highlight
 
 var defaultNumberChars = []string{
 	" ", "\t", "\n",
-	".", "=", "<", ">", ":", ";",
+	".", "<", ">", ":", ";",
+	"=", "+", "-", "*", "/", "&", "^",
 	"(", ")", "[", "]", "{", "}",
 }
 
@@ -34,7 +35,7 @@ func formatNumber(text string, cmdStartChars []string, cmdEndChars []string) str
 	textLen := len(textRune)
 
 	buffer := ""
-	bufferOpen := false
+	bufferOpen := true
 	otherSpanTagOpen := 0
 
 	for i := range textRune {
