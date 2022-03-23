@@ -33,6 +33,10 @@ func TestShareFormatNumber(t *testing.T) {
 			ExpectResult: "\ntest\n",
 		},
 		{
+			Input:        "Русский\nтекст\n",
+			ExpectResult: "Русский\nтекст\n",
+		},
+		{
 			Input:        "100",
 			ExpectResult: "<span class='" + StyleValue + "'>100</span>",
 		},
@@ -55,10 +59,6 @@ func TestShareFormatNumber(t *testing.T) {
 		{
 			Input:        "<span class='" + StyleOperator + "'>+</span>100",
 			ExpectResult: "<span class='" + StyleOperator + "'>+</span><span class='" + StyleValue + "'>100</span>",
-		},
-		{
-			Input:        "Русский\nтекст\n",
-			ExpectResult: "Русский\nтекст\n",
 		},
 	}
 

@@ -21,7 +21,8 @@ package highlight
 var defaultKeywordChars = []string{
 	"", " ", "\t", "\n",
 	"<", ">", ":", ";",
-	"(", ")", "{", "}",
+	"=", "+", "-", "*", "/", "&", "^",
+	"(", ")", "[", "]", "{", "}",
 }
 
 var defaultOperatorChars = []string{
@@ -44,18 +45,18 @@ var defaultOperatorChars = []string{
 // Processes keywords, commands and var types.
 // Content inside <span>....</span> is ignored.
 // It is assumed that all HTML tags except <span>....</span> were shielded.
-func formatWord(line string, command string, cmdStartChars []string, cmdEndChars []string, styleClass string) string {
+func formatWord(text string, command string, cmdStartChars []string, cmdEndChars []string, styleClass string) string {
 	result := ""
 
-	lineRune := []rune(line)
-	lineLen := len(lineRune)
+	textRune := []rune(text)
+	textLen := len(textRune)
 	commandLen := len(command)
 
 	otherSpanTagOpen := 0
 	skip := 0
 
-	for i := range lineRune {
-		char := string(lineRune[i])
+	for i := range textRune {
+		char := string(textRune[i])
 
 		// Skip
 		if skip != 0 {
@@ -67,33 +68,33 @@ func formatWord(line string, command string, cmdStartChars []string, cmdEndChars
 		lastChar := ""
 
 		if i != 0 {
-			lastChar = string(lineRune[i-1])
+			lastChar = string(textRune[i-1])
 		}
 
 		// Get command end char
 		cmdEndChar := ""
 
-		if lineLen > i+commandLen {
-			cmdEndChar = string(lineRune[i+commandLen])
+		if textLen > i+commandLen {
+			cmdEndChar = string(textRune[i+commandLen])
 		}
 
 		// Get sub string
 		subLine := ""
 
-		if lineLen > i+commandLen-1 {
-			subLine = string(lineRune[i : i+commandLen])
+		if textLen > i+commandLen-1 {
+			subLine = string(textRune[i : i+commandLen])
 		}
 
 		// Find <span
-		if lineLen > i+5 {
-			if string(lineRune[i:i+5]) == "<span" {
+		if textLen > i+5 {
+			if string(textRune[i:i+5]) == "<span" {
 				otherSpanTagOpen = otherSpanTagOpen + 1
 			}
 		}
 
 		// Find </span>
-		if lineLen > i+7 {
-			if string(lineRune[i:i+7]) == "</span>" {
+		if textLen > i+7 {
+			if string(textRune[i:i+7]) == "</span>" {
 				otherSpanTagOpen = otherSpanTagOpen - 1
 			}
 		}
