@@ -31,6 +31,7 @@ func replacePrefix(line string, prefixOld string, prefixNew string) string {
 	return line
 }
 
+// Checks if rune is a number.
 func isNumber(char rune) bool {
 	switch char {
 	case '0':
@@ -56,4 +57,39 @@ func isNumber(char rune) bool {
 	}
 
 	return false
+}
+
+// Checks if the string is in the list.
+func isInStrList(list []string, str string) bool {
+	for _, item := range list {
+		if item == str {
+			return true
+		}
+	}
+
+	return false
+}
+
+// Shields HTML tags.
+func shieldHTML(code string) string {
+	var result string = ""
+
+	codeRune := []rune(code)
+
+	for i := range codeRune {
+		char := string(codeRune[i])
+
+		switch char {
+		case "<":
+			result = result + "&lt"
+		case ">":
+			result = result + "&gt"
+		case "&":
+			result = result + "&amp"
+		default:
+			result = result + char
+		}
+	}
+
+	return result
 }

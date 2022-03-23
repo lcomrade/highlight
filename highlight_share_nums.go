@@ -108,13 +108,3 @@ func formatNumber(text string, cmdStartChars []string, cmdEndChars []string) str
 
 	return result
 }
-
-func isInStrList(list []string, char string) bool {
-	for _, ch := range list {
-		if ch == char {
-			return true
-		}
-	}
-
-	return false
-}
