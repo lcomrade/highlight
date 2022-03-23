@@ -8,9 +8,9 @@ programming and markup languages inside HTML documents.
 
 ## Install
 Supported Go versions:
-- 1.9
 - 1.11
 - 1.17
+- 1.18
 
 Add to `go.mod` file:
 ```go.mod
