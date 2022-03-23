@@ -113,10 +113,10 @@ if myBool == true {
 `,
 			ExpectResult: `
 <span class='` + StyleKeyword + `'>if</span> myBool <span class='` + StyleOperator + `'>==</span> <span class='` + StyleValue + `'>true</span> {
-	println(<span class='` + StyleBrackets + `'>"OK"</span>)
+	<span class='` + StyleBuildInFunc + `'>println</span>(<span class='` + StyleBrackets + `'>"OK"</span>)
 
 } <span class='` + StyleKeyword + `'>else</span> {
-	println(<span class='` + StyleBrackets + `'>"FAIL"</span>)
+	<span class='` + StyleBuildInFunc + `'>println</span>(<span class='` + StyleBrackets + `'>"FAIL"</span>)
 }
 `,
 		},

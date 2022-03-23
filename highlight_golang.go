@@ -100,6 +100,23 @@ package highlight
 //   rune
 //   string
 //
+// Supported built-in functions (const StyleBuildInFunc):
+//   append
+//   cap
+//   close
+//   complex
+//   copy
+//   delete
+//   imag
+//   len
+//   make
+//   new
+//   panic
+//   print
+//   println
+//   real
+//   recover
+//
 // Also supported:
 //   Single-line comments (//)
 //   Multi-line comments (/* */)
@@ -148,6 +165,15 @@ func Golang(code string) string {
 		"string",
 	}
 
+	// Build-in functions
+	buildInFuncs := []string{
+		"append", "cap", "close",
+		"complex", "copy", "delete",
+		"imag", "len", "make",
+		"new", "panic", "print",
+		"println", "real", "recover",
+	}
+
 	// Multi-line comments
 	code = formatOpenClose(code, "/*", "*/", StyleComment)
 
@@ -174,6 +200,11 @@ func Golang(code string) string {
 	// Varibles types
 	for _, word := range varTypes {
 		code = formatWord(code, word, defaultKeywordChars, defaultKeywordChars, StyleVarType)
+	}
+
+	// Build-in functions
+	for _, word := range buildInFuncs {
+		code = formatWord(code, word, defaultKeywordChars, defaultKeywordChars, StyleBuildInFunc)
 	}
 
 	// Numbers
