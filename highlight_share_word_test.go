@@ -68,7 +68,6 @@ func TestShareFormatWordKeyword(t *testing.T) {
 	runTest(testFunc, testData, t)
 }
 
-
 func TestShareFormatWordOperator(t *testing.T) {
 	testData := []testDataType{
 		{
@@ -85,11 +84,11 @@ func TestShareFormatWordOperator(t *testing.T) {
 		},
 		{
 			Input:        "a=2+1",
-			ExpectResult: "a<span class='"+StyleOperator+"'>=</span>2<span class='"+StyleOperator+"'>+</span>1",
+			ExpectResult: "a<span class='" + StyleOperator + "'>=</span>2<span class='" + StyleOperator + "'>+</span>1",
 		},
 		{
 			Input:        "c=a+b",
-			ExpectResult: "c<span class='"+StyleOperator+"'>=</span>a<span class='"+StyleOperator+"'>+</span>b",
+			ExpectResult: "c<span class='" + StyleOperator + "'>=</span>a<span class='" + StyleOperator + "'>+</span>b",
 		},
 	}
 

@@ -50,7 +50,7 @@ func formatWord(text string, command string, cmdStartChars []string, cmdEndChars
 
 	textRune := []rune(text)
 	textLen := len(textRune)
-	commandLen := len(command)
+	commandLen := len([]rune(command))
 
 	otherSpanTagOpen := 0
 	skip := 0
@@ -101,30 +101,12 @@ func formatWord(text string, command string, cmdStartChars []string, cmdEndChars
 
 		// Check sub string
 		if subLine == command && otherSpanTagOpen == 0 {
-			okStart := false
-			okEnd := false
-
-			// Check command start char
-			for _, ch := range cmdStartChars {
-				if ch == lastChar {
-					okStart = true
-					break
-				}
-			}
-
-			// Check command end char
-			for _, ch := range cmdEndChars {
-				if ch == cmdEndChar {
-					okEnd = true
-					break
-				}
-			}
-
-			// Save
-			if okStart == true && okEnd == true {
+			// OK
+			if isInStrList(cmdStartChars, lastChar) && isInStrList(cmdEndChars, cmdEndChar) {
 				result = result + "<span class='" + styleClass + "'>" + command + "</span>"
 				skip = commandLen - 1
 
+				// Not OK
 			} else {
 				result = result + char
 			}

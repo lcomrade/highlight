@@ -26,8 +26,8 @@ func formatOpenClose(text string, openStr string, closeStr string, styleClass st
 
 	textRune := []rune(text)
 	textLen := len(textRune)
-	openLen := len(openStr)
-	closeLen := len(closeStr)
+	openLen := len([]rune(openStr))
+	closeLen := len([]rune(closeStr))
 
 	spanTagOpen := false
 	otherSpanTagOpen := 0
