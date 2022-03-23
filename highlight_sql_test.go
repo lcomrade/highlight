@@ -49,7 +49,7 @@ HAVING
 <span class='` + StyleKeyword + `'>GROUP BY</span>
   DeptID
 <span class='` + StyleKeyword + `'>HAVING</span>
-  SUM(SaleAmount) &gt <span class='` + StyleNumber + `'>1000</span>
+  SUM(SaleAmount) &gt <span class='` + StyleValue + `'>1000</span>
 `,
 		},
 	}

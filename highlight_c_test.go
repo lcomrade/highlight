@@ -40,7 +40,7 @@ int main() {
 <span class='` + StyleKeyword + `'>int</span> main() {
 	printf(<span class='` + StyleBrackets + `'>"Hello, world!"</span>);
 
-	<span class='` + StyleKeyword + `'>return</span> <span class='` + StyleNumber + `'>0</span>;
+	<span class='` + StyleKeyword + `'>return</span> <span class='` + StyleValue + `'>0</span>;
 }
 `,
 		},

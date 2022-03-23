@@ -85,7 +85,7 @@ if __name__ == "__main__":
 This is test.
 """</span>
 
-<span class='` + StyleKeyword + `'>def</span> main() -&gt <span class='` + StyleKeyword + `'>None</span>:
+<span class='` + StyleKeyword + `'>def</span> main() -&gt <span class='` + StyleValue + `'>None</span>:
 	name <span class='` + StyleOperator + `'>=</span> <span class='` + StyleBuildInFunc + `'>input</span>(<span class='` + StyleBrackets + `'>"Your name:"</span>)
 
 	<span class='` + StyleKeyword + `'>if</span> name <span class='` + StyleOperator + `'>==</span> <span class='` + StyleBrackets + `'>"Ivan"</span> <span class='` + StyleKeyword + `'>or</span> name <span class='` + StyleOperator + `'>==</span> <span class='` + StyleBrackets + `'>"Nikolai"</span>:

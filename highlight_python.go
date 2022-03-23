@@ -22,9 +22,6 @@ package highlight
 // Read more: https://docs.python.org/3/reference/index.html
 //
 // Supported keywords (const StyleKeyword):
-//   False
-//   None
-//   True
 //   and
 //   as
 //   assert
@@ -57,6 +54,12 @@ package highlight
 //   while
 //   with
 //   yield
+//
+// Supported values (const StyleValue):
+//   True
+//   False
+//   None
+//   All numbers (100, 1.3, 2.25)
 //
 // Supported operators (const StyleOperator):
 //   +
@@ -168,14 +171,12 @@ package highlight
 //   Multi-line comments (''' ''')
 //   Single-line brackets (", ')
 //   Multi-line brackets (""" """)
-//   Numbers (100, 1.2, 1.25)
 func Python(code string) string {
 	// Shild HTML
 	code = shieldHTML(code)
 
 	// Keywords
 	keywords := []string{
-		"False", "None", "True",
 		"and", "as", "assert",
 		"async", "await", "break",
 		"class", "continue", "def",
@@ -187,6 +188,11 @@ func Python(code string) string {
 		"or", "pass", "raise",
 		"return", "try", "while",
 		"with", "yield",
+	}
+
+	// Values
+	values := []string{
+		"False", "None", "True",
 	}
 
 	// Operators
@@ -269,6 +275,11 @@ func Python(code string) string {
 
 	// Numbers
 	code = formatNumber(code, defaultNumberChars, defaultNumberChars)
+
+	// True, False and None
+	for _, word := range values {
+		code = formatWord(code, word, defaultKeywordChars, defaultKeywordChars, StyleValue)
+	}
 
 	return code
 }

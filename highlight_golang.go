@@ -48,6 +48,12 @@ package highlight
 //   type
 //   var
 //
+// Supported values (const StyleValue):
+//   true
+//   false
+//   nil
+//   All numbers (100, 1.3, 2.25)
+//
 // Supported operators (const StyleOperator):
 //   !
 //   !=
@@ -99,7 +105,6 @@ package highlight
 //   Multi-line comments (/* */)
 //   Single-line brackets (", ')
 //   Multi-line brackets (` `)
-//   Numbers (100, 1.2, 1.25)
 func Golang(code string) string {
 	// Shild HTML
 	code = shieldHTML(code)
@@ -115,6 +120,11 @@ func Golang(code string) string {
 		"range", "return", "select",
 		"struct", "switch", "type",
 		"var",
+	}
+
+	// Values
+	values := []string{
+		"true", "false", "nil",
 	}
 
 	// Operators
@@ -168,6 +178,11 @@ func Golang(code string) string {
 
 	// Numbers
 	code = formatNumber(code, defaultNumberChars, defaultNumberChars)
+
+	// true, false and nil
+	for _, word := range values {
+		code = formatWord(code, word, defaultKeywordChars, defaultKeywordChars, StyleValue)
+	}
 
 	return code
 }

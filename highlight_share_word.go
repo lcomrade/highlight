@@ -19,7 +19,8 @@
 package highlight
 
 var defaultKeywordChars = []string{
-	"", " ", "\t", "\n", ":", ";",
+	"", " ", "\t", "\n",
+	"<", ">", ":", ";",
 	"(", ")", "{", "}",
 }
 

@@ -20,7 +20,7 @@ package highlight
 
 var defaultNumberChars = []string{
 	" ", "\t", "\n",
-	".", "=", ":", ";",
+	".", "=", "<", ">", ":", ";",
 	"(", ")", "[", "]", "{", "}",
 }
 
@@ -63,7 +63,7 @@ func formatNumber(text string, cmdStartChars []string, cmdEndChars []string) str
 			if bufferOpen == true && isNumber(charRune) == false {
 				// Good close
 				if isInStrList(cmdEndChars, char) && buffer != "" {
-					result = result + "<span class='" + StyleNumber + "'>" + buffer + "</span>"
+					result = result + "<span class='" + StyleValue + "'>" + buffer + "</span>"
 
 					// Bad close
 				} else {
@@ -91,7 +91,7 @@ func formatNumber(text string, cmdStartChars []string, cmdEndChars []string) str
 		} else {
 			if bufferOpen == true {
 				if buffer != "" {
-					result = result + "<span class='" + StyleNumber + "'>" + buffer + "</span>"
+					result = result + "<span class='" + StyleValue + "'>" + buffer + "</span>"
 					buffer = ""
 				}
 
@@ -103,7 +103,7 @@ func formatNumber(text string, cmdStartChars []string, cmdEndChars []string) str
 	}
 
 	if bufferOpen == true && buffer != "" {
-		result = result + "<span class='" + StyleNumber + "'>" + buffer + "</span>"
+		result = result + "<span class='" + StyleValue + "'>" + buffer + "</span>"
 	}
 
 	return result

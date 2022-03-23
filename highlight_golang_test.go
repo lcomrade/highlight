@@ -102,6 +102,24 @@ end
 }
 `,
 		},
+		{
+			Input: `
+if myBool == true {
+	println("OK")
+
+} else {
+	println("FAIL")
+}
+`,
+			ExpectResult: `
+<span class='` + StyleKeyword + `'>if</span> myBool <span class='` + StyleOperator + `'>==</span> <span class='` + StyleValue + `'>true</span> {
+	println(<span class='` + StyleBrackets + `'>"OK"</span>)
+
+} <span class='` + StyleKeyword + `'>else</span> {
+	println(<span class='` + StyleBrackets + `'>"FAIL"</span>)
+}
+`,
+		},
 	}
 
 	runTest(Golang, testData, t)
