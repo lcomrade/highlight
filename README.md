@@ -60,6 +60,7 @@ After highlighting:
 - Dockerfile
 - Golang
 - `go.mod`
+- INI
 - Python
 - `robots.txt`
 - SQL

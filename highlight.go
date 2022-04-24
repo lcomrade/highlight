@@ -37,6 +37,7 @@ const (
 	StyleBuildInFunc = "code-build-in-func"
 	StyleComment     = "code-comment"
 	StyleBrackets    = "code-brackets"
+	StyleKey         = "code-key"
 	StyleValue       = "code-value"
 )
 
@@ -50,6 +51,7 @@ const (
 //   | Dockerfile    | dockerfile      |
 //   | Golang        | go, golang      |
 //   | GoMod         | go.mod          |
+//   | INI config    | ini             |
 //   | Python        | python, python3 |
 //   | RobotsTxt     | robots.txt      |
 //   | SQL           | sql             |
@@ -68,6 +70,9 @@ func ByName(code string, language string) (string, error) {
 
 	case "go.mod":
 		return GoMod(code), nil
+
+	case "ini":
+		return INI(code), nil
 
 	case "python", "python3":
 		return Python(code), nil
