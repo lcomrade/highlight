@@ -52,6 +52,7 @@ const (
 //   | Golang        | go, golang      |
 //   | GoMod         | go.mod          |
 //   | INI config    | ini             |
+//   | Java          | java            |
 //   | Python        | python, python3 |
 //   | RobotsTxt     | robots.txt      |
 //   | SQL           | sql             |
@@ -73,6 +74,9 @@ func ByName(code string, language string) (string, error) {
 
 	case "ini":
 		return INI(code), nil
+
+	case "java":
+		return Java(code), nil
 
 	case "python", "python3":
 		return Python(code), nil

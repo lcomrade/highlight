@@ -61,6 +61,7 @@ After highlighting:
 - Golang
 - `go.mod`
 - INI
+- Java
 - Python
 - `robots.txt`
 - SQL
