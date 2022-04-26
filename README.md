@@ -98,6 +98,26 @@ int main() {
 *[Read more in the documentation](https://pkg.go.dev/github.com/lcomrade/highlight#section-documentation)*
 
 
+## CSS classes
+Example of a CSS file:
+```css
+.code-operator, .code-keyword, .code-build-in-func, .code-key {
+	color: Firebrick;
+}
+
+.code-var-type, .code-build-in-var {
+	color: RoyalBlue;
+}
+
+.code-brackets {
+	color: ForestGreen;
+}
+
+.code-comment {
+	color: DimGray;
+}
+```
+
 ## Documentation
 - Offline documentation: `go doc -all github.com/lcomrade/highlight`
 - [Online documentation](https://pkg.go.dev/github.com/lcomrade/highlight#section-documentation)

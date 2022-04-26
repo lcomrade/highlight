@@ -1,6 +1,11 @@
 # Changelog
 Semantic versioning is used (https://semver.org/).
 
+## v1.0.4
+- Add Java support
+- Add JSON support
+- Add INI support
+
 ## v1.0.3
 - Add number highlight
 - Now true, false, nil and numbers are marked as `StyleValue`
