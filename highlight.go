@@ -53,6 +53,7 @@ const (
 //   | GoMod         | go.mod          |
 //   | INI config    | ini             |
 //   | Java          | java            |
+//   | JSON          | json            |
 //   | Python        | python, python3 |
 //   | RobotsTxt     | robots.txt      |
 //   | SQL           | sql             |
@@ -77,6 +78,9 @@ func ByName(code string, language string) (string, error) {
 
 	case "java":
 		return Java(code), nil
+
+	case "json":
+		return JSON(code), nil
 
 	case "python", "python3":
 		return Python(code), nil
